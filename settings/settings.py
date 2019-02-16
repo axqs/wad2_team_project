@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rango',
+    'recipes',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'tango_with_django_project.urls'
+ROOT_URLCONF = 'settings.url_patterns'
 
 TEMPLATES = [
     {
@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
+WSGI_APPLICATION = 'settings.wsgi.application'
 
 
 # Database
@@ -114,4 +114,4 @@ MEDIA_ROOT = MEDIA_DIR
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-LOGIN_URL = '/rango/login/'
+LOGIN_URL = '/recipes/login/'
