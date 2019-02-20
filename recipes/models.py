@@ -23,6 +23,7 @@ class Chef(models.Model):
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
     password = models.CharField(max_length=50)
+    photo = models.ImageField(upload_to='profile_pics', default='{profile_pics/anon.png')
 
     def __str__(self):
         return self.username
