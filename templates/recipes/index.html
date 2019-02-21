@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Index</h1>
-  <p>superuser username: qiufei password: qiufeismart</p>
+  <p>superuser username: wad2 password: wad2teamproject</p>
   <h3>Recipes</h3>
   {% if recipes %}
   <ul>
@@ -18,6 +18,19 @@
   </ul>
   {% else %}
     <strong>There are no recipes present.</strong>
+  {% endif %}
+
+  <h3>Categories</h3>
+  {% if cats %}
+  <ul>
+    {% for cat in cats %}
+      <li>
+        {{ cat.supercat }} -- {{ cat.name }}
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <strong>There are no categories present.</strong>
   {% endif %}
   </body>
 </html>

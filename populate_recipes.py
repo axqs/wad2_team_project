@@ -99,11 +99,13 @@ def populate():
 
     for cat, cat_data in cats.items():
         if(cat == "Cuisines"):
+            c = add_cat(cat, 0, 'CAT', None)
+            cat_objects[cat] = c
             for cuisine, cuisine_data in cuisines.items():
-                c = add_cat(cuisine, cuisine_data["likes"])
-                cat_objects[cuisine] = c
+                sc = add_cat(cuisine, cuisine_data["likes"], 'SUB', c)
+                cat_objects[cuisine] = sc
         else:
-            c = add_cat(cat,cat_data["likes"])
+            c = add_cat(cat,cat_data["likes"], 'CAT', None)
             cat_objects[cat] = c
 
     for cat, cat_data in cats.items():
@@ -115,23 +117,22 @@ def populate():
             for r in cat_data["recipes"]:
                 add_recipe(r["cats"], r["name"], r["cook_time"], r["chef"])
 
-    for r in Recipe.objects.all():
-        print("- {0} ".format(str(r)))
-        print(" - ",r.categories.all())
-
 def add_recipe(cats_lst, name, cook_time, chef):
     r = Recipe.objects.get_or_create(chef=admin_objects[chef], name=name)[0]
     r.name = name
     r.cook_time = cook_time
     cats_lst = cats_lst.split(", ")
-    print(name,"\n",cats_lst)
+    print(name,cats_lst)
     for c in cats_lst:
         r.categories.add(cat_objects[c])
     r.save()
     return r
 
-def add_cat(name, likes=0):
-    c = Category.objects.get_or_create(name=name)[0]
+def add_cat(name, likes, type, supercat):
+    if type == 'SUB':
+        c = Category.objects.get_or_create(name=name, type=type, supercat=supercat)[0]
+    else:
+        c = Category.objects.get_or_create(name=name, type=type)[0]
     c.likes=likes
     c.save()
     return c

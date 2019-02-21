@@ -3,9 +3,15 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
+    TYPES = (
+        ('CAT', 'Category'),
+        ('SUB', 'Subcategory')
+    )
     name = models.CharField(max_length=50, unique=True)
+    type = models.CharField(max_length=25, choices=TYPES, default='CAT')
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
+    supercat = models.ForeignKey('self', null=True, related_name='category')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -32,7 +38,7 @@ class Recipe(models.Model):
     chef = models.ForeignKey(Chef)
     categories = models.ManyToManyField(Category)
     name = models.CharField(max_length=128, unique=True)
-    #photo = models.ImageField(upload_to='profile_pics', blank=True)
+    photo = models.ImageField(upload_to='food_pics', blank=True)
     cook_time = models.IntegerField(default=0)
 
     def __str__(self):

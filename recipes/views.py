@@ -11,6 +11,7 @@ from datetime import datetime
 
 def index(request):
     recipes = Recipe.objects.order_by('name')
-    context_dict = {'recipes':recipes}
+    cats = Category.objects.all()
+    context_dict = {'recipes':recipes, 'cats':cats}
     response = render(request,'recipes/index.html', context=context_dict)
     return response
