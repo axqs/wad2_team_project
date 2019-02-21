@@ -40,6 +40,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=128, unique=True)
     photo = models.ImageField(upload_to='food_pics', blank=True)
     cook_time = models.IntegerField(default=0)
+    #ingredients, steps, overall rating
 
     def __str__(self):
         return self.name
