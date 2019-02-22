@@ -1,7 +1,10 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from datetime import *
+from django.utils import *
 # Create your models here.
+
 class Category(models.Model):
     TYPES = (
         ('CAT', 'Category'),
@@ -37,6 +40,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=128, unique=True)
     photo = models.ImageField(upload_to='food_pics', blank=True)
     cook_time = models.IntegerField(default=0)
+    date_posted = models.DateTimeField(default=timezone.now)
     #ingredients, steps, overall rating
 
     def save(self, *args, **kwargs):
@@ -52,3 +56,4 @@ class Review(models.Model):
     title = models.CharField(max_length=50, default="My Rating")
     rating = models.DecimalField(decimal_places=2,max_digits=3,default=5.00)
     comment = models.TextField(default="")
+    date_posted = models.DateTimeField(default=timezone.now)

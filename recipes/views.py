@@ -10,10 +10,15 @@ from datetime import datetime
 # Create your views here.
 
 def index(request):
+    #get all recipes, order alphabetically by name
     recipes = Recipe.objects.order_by('name')
+    #get all categories -- no order
     cats = Category.objects.all()
+    #get users that are chefs -- order alphabetically by username
     chefs = Chef.objects.order_by('user')
+    #get all recipes under dinner category
     dinners = Category.objects.get(name="Dinner").recipe_set.all()
+
     context_dict = {'recipes':recipes, 'cats':cats, 'chefs':chefs, 'dinners':dinners}
     response = render(request,'recipes/index.html', context=context_dict)
     return response
