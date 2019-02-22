@@ -36,11 +36,16 @@ class Chef(models.Model):
 
 class Recipe(models.Model):
     chef = models.ForeignKey(User)
+    slug = models.SlugField(unique=True)
     categories = models.ManyToManyField(Category)
     name = models.CharField(max_length=128, unique=True)
     photo = models.ImageField(upload_to='food_pics', blank=True)
     cook_time = models.IntegerField(default=0)
     #ingredients, steps, overall rating
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.chef.username+"-"+self.name)
+        super(Recipe, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
