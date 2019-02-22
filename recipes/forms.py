@@ -27,9 +27,9 @@ class ReviewForm(forms.ModelForm):
 
 #asls for name of recipe, a photo, and cook time of recipe
 class RecipeForm(forms.ModelForm):
-    name = forms.CharField(help_text="Name of your recipe")
+    name = forms.CharField(widget=forms.TextInput(), help_text="Name of your recipe")
     photo = forms.ImageField()
-    cook_time = forms.IntegerField()
+    cook_time = forms.IntegerField(min_value=0)
 
     class Meta:
         model = Recipe
