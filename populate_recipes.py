@@ -95,10 +95,12 @@ def populate():
             "Cuisines": cuisines,
             "Special Occasions": {"recipes": special_recipes, "likes": 16 },}
 
+    print(" -Initializing admins . . .")
     for admin, admin_data in admins.items():
         u = add_user(admin,admin_data)
         admin_objects[admin] = u
 
+    print(" -Creating Categories . . .")
     for cat, cat_data in cats.items():
         if(cat == "Cuisines"):
             c = add_cat(cat, 0, 'CAT', None)
@@ -110,6 +112,7 @@ def populate():
             c = add_cat(cat,cat_data["likes"], 'CAT', None)
             cat_objects[cat] = c
 
+    print(" -Adding recipes . . .")
     for cat, cat_data in cats.items():
         if(cat == "Cuisines"):
             for subcat, subcat_data in cat_data.items():
@@ -119,6 +122,7 @@ def populate():
             for r in cat_data["recipes"]:
                 add_recipe(r["cats"], r["name"], r["cook_time"], r["chef"])
 
+    print(" -Adding reviews . . .")
     for review, review_data in reviews.items():
         r = add_review(review,review_data)
 
@@ -127,13 +131,14 @@ def add_recipe(cats_lst, name, cook_time, chef):
     r.name = name
     r.cook_time = cook_time
     cats_lst = cats_lst.split(", ")
-    print(name,cats_lst)
+    print("   ",name,cats_lst)
     for c in cats_lst:
         r.categories.add(cat_objects[c])
     r.save()
     return r
 
 def add_cat(name, likes, type, supercat):
+    print("   ",name, type)
     if type == 'SUB':
         c = Category.objects.get_or_create(name=name, type=type, supercat=supercat)[0]
     else:
@@ -151,15 +156,11 @@ def add_user(username, user_data):
     user.is_staff = True
     user.save()
     if(user_data["chef"]):
-        add_chef(user, user.username, user.first_name, user.last_name, user.email)
+        add_chef(user)
     return user
 
-def add_chef(user,username,fname,lname,email):
+def add_chef(user):
     chef = Chef.objects.get_or_create(user=user)[0]
-    chef.username = username
-    chef.fname = fname
-    chef.lname = lname
-    chef.email = email
     chef.save()
     return chef
 
@@ -170,8 +171,7 @@ def add_review(title,review_data):
     rating = review_data["rating"]
 
     recipe = Recipe.objects.get(chef=admin_objects[recipe_chef], name=recipe_name)
-    chef = Chef.objects.get(user=admin_objects[author])
-    review = Review.objects.get_or_create(recipe=recipe, author=chef)[0]
+    review = Review.objects.get_or_create(recipe=recipe, author=admin_objects[author])[0]
     review.title = title
     review.rating = review_data["rating"]
     review.save()
@@ -180,3 +180,4 @@ def add_review(title,review_data):
 if __name__ == '__main__':
     print("Starting Rango population script...")
     populate()
+    print("Population complete.")

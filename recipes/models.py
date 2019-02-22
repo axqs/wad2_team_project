@@ -25,10 +25,6 @@ class Category(models.Model):
 
 class Chef(models.Model):
     user = models.OneToOneField(User)
-    username =  models.CharField(max_length=128)
-    fname =  models.CharField(max_length=128)
-    lname =  models.CharField(max_length=128)
-    email = models.EmailField()
     photo = models.ImageField(upload_to='profile_pics', default='profile_pics/anon.png')
 
     def __str__(self):
@@ -52,6 +48,7 @@ class Recipe(models.Model):
 
 class Review(models.Model):
     recipe = models.ForeignKey(Recipe)
-    author = models.ForeignKey(Chef)
+    author = models.ForeignKey(User)
     title = models.CharField(max_length=50, default="My Rating")
     rating = models.DecimalField(decimal_places=2,max_digits=3,default=5.00)
+    comment = models.TextField(default="")

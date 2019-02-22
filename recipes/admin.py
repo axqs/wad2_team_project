@@ -9,13 +9,10 @@ class RecipeAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name', 'type')}
 
-class ChefAdmin(admin.ModelAdmin):
-    list_display = ('username','fname','lname','email')
-
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('recipe','author','rating')
+    list_display = ('recipe','author','rating','comment')
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Chef, ChefAdmin)
+admin.site.register(Chef)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Review, ReviewAdmin)
