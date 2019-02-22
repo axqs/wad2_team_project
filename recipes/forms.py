@@ -1,3 +1,3 @@
 from django import forms
-import recipes.models
+from recipes.models import *
 from django.contrib.auth.models import User

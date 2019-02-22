@@ -20,17 +20,45 @@
     <strong>There are no recipes present.</strong>
   {% endif %}
 
-  <h3>Categories</h3>
-  {% if cats %}
+  <h3>Dinner Recipes</h3>
+  {% if dinners %}
   <ul>
-    {% for cat in cats %}
+    {% for dinner in dinners %}
       <li>
-        {{ cat.supercat }} -- {{ cat.name }}
+        {{ dinner.name }} -- {{ dinner.chef }}
       </li>
     {% endfor %}
   </ul>
   {% else %}
+    <strong>There are no dinner recipes present.</strong>
+  {% endif %}
+
+  <h3>Categories</h3>
+  {% if cats %}
+  <ul>
+    {% for cat in cats %}
+        {% if cat.type == 'SUB' %}
+          <li>{{ cat.supercat }} -- {{ cat.name }}, Likes: {{ cat.likes }}</li>
+        {% elif cat.name != 'Cuisines' %}
+          <li>{{ cat.name }}, Likes: {{ cat.likes }}</li>
+        {% endif %}
+    {% endfor %}
+  </ul>
+  {% else %}
     <strong>There are no categories present.</strong>
+  {% endif %}
+
+  <h3>Chefs</h3>
+  {% if chefs %}
+    <ul>
+      {% for chef in chefs %}
+        <li>
+          {{ chef.fname }} {{ chef.lname }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <strong>There are no chefs present.</strong>
   {% endif %}
   </body>
 </html>
