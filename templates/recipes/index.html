@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+{% extends 'recipes/base.html' %}
 {% load staticfiles %}
-<html>
-<head>
-  <title>Index</title>
-</head>
-<body>
-  <h1>Index</h1>
+
+{% block title_block %}
+  Index
+{% endblock %}
+
+{% block body_block %}
+
   <p>superuser username: wad2 password: wad2teamproject</p>
   <h3>Recipes</h3>
   {% if recipes %}
@@ -49,17 +50,4 @@
     <strong>There are no categories present.</strong>
   {% endif %}
 
-  <h3>Chefs</h3>
-  {% if chefs %}
-    <ul>
-      {% for chef in chefs %}
-        <li>
-          {{ chef.user.get_full_name }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <strong>There are no chefs present.</strong>
-  {% endif %}
-  </body>
-</html>
+{% endblock %}

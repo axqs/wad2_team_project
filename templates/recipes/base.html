@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{% load rango_template_tags%}
 
 <html>
 	<head lang="en">
     <meta charset="utf-8" />
 		<title>
-      Rango -
+      Welcome to the
       {% block title_block %}
-        How to Tango with Django!
+        Neighborhood Cookbook
       {% endblock %}
     </title>
 	</head>
-
+  <div>
+    <a href="{% url 'index' %}">Index</a>
+  </div>
 	<body>
-
-    <div>
-        {% block sidebar_block %}
-          {% get_category_list category %}
-        {% endblock %}
-    </div>
 
     <div>
       {% block body_block %}
@@ -27,18 +22,7 @@
     </div>
 
     <div>
-      <ul>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
-          <li><a href="{% url 'logout' %}">Logout</a></li>
-          <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Sign In</a></li>
-          <li><a href="{% url 'register' %}">Sign Up</a></li>
-        {% endif %}
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'index' %}">Index</a></li>
-      </ul>
+      <a href="{% url 'about' %}">About</a>
     </div>
 
 	</body>

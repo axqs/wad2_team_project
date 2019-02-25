@@ -14,11 +14,17 @@ def index(request):
     recipes = Recipe.objects.order_by('name')
     #get all categories -- no order
     cats = Category.objects.all()
-    #get users that are chefs -- order alphabetically by username
-    chefs = Chef.objects.order_by('user')
     #get all recipes under dinner category
     dinners = Category.objects.get(name="Dinner").recipe_set.all()
 
-    context_dict = {'recipes':recipes, 'cats':cats, 'chefs':chefs, 'dinners':dinners}
+    context_dict = {'recipes':recipes, 'cats':cats, 'dinners':dinners}
     response = render(request,'recipes/index.html', context=context_dict)
+    return response
+
+def about(request):
+    #get users that are chefs -- order alphabetically by username
+    chefs = Chef.objects.order_by('user')
+    context_dict = {'chefs':chefs}
+
+    response = render(request,'recipes/about.html', context=context_dict)
     return response

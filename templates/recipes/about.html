@@ -1,0 +1,25 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+  About
+{% endblock %}
+
+{% block body_block %}
+
+  <p>superuser username: wad2 password: wad2teamproject</p>
+
+  <h3>Chefs</h3>
+  {% if chefs %}
+    <ul>
+      {% for chef in chefs %}
+        <li>
+          {{ chef.user.get_full_name }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <strong>There are no chefs present.</strong>
+  {% endif %}
+
+{% endblock %}

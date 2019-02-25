@@ -15,7 +15,7 @@ class ChefForm(forms.ModelForm):
         model = Chef
         fields = ('photo',)
 
-#asks for title of rating, actual rating 0-5, and any additional comments
+#asks for title of rating, actual rating 0-5 decimal, and any additional comments
 class ReviewForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Add a title")
     rating = forms.DecimalField(widget=forms.NumberInput(), min_value=0, max_value=5)
@@ -49,12 +49,12 @@ class RecipeForm(forms.ModelForm):
 #for view
 #if form.is_valid():
 #            cats = form.cleaned_data.get('categories')
-#views part for username
+#views part get username
 #def my_view(request):
 #    username = None
 #    if request.user.is_authenticated():
 #        username = request.user.username
-#html for forms
+#for templates i think
 #<form method='post'>
 #    {{ form.as_p }}
 #    <input type='submit' value='submit'>
