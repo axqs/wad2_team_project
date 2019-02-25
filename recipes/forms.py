@@ -27,10 +27,39 @@ class ReviewForm(forms.ModelForm):
 
 #asls for name of recipe, a photo, and cook time of recipe
 class RecipeForm(forms.ModelForm):
+    CATEGORIES =(
+        ("1","Breakfast"),
+        ("2","Lunch"),
+        ("3","Dinner"),
+        ("4","Dessert"),
+        ("6","Italian"),
+        ("7","American"),
+        ("8","Mexican"),
+        ("9","Chinese"),
+        ("10","Indian"),
+        ("11","Japanese"),
+        ("12","Special Occasions"),
+    )
     name = forms.CharField(widget=forms.TextInput(), help_text="Name of your recipe")
     photo = forms.ImageField()
     cook_time = forms.IntegerField(min_value=0)
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES)
+
+#for view
+#if form.is_valid():
+#            cats = form.cleaned_data.get('categories')
+#views part for username
+#def my_view(request):
+#    username = None
+#    if request.user.is_authenticated():
+#        username = request.user.username
+#html for forms
+#<form method='post'>
+#    {{ form.as_p }}
+#    <input type='submit' value='submit'>
+#</form>
 
     class Meta:
         model = Recipe
-        fields = ('name','photo','cook_time')
+        fields = ('name','photo','cook_time','categories')
