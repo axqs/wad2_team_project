@@ -63,3 +63,18 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('name','photo','cook_time','categories')
+
+
+
+"""
+top
+<!-- <a href="{% url 'trending' %}">Trending</a>
+<a href="{% url 'categories' %}">Categories</a>
+<a href="{% url 'login' %}">Login/a>
+<a href="{% url 'signup' %}">Sign Up</a> -->
+
+bottom
+<!-- <a href="{% url 'contact' %}">Contact Us</a>
+<a href="{% url 'faqs' %}">FAQs</a>
+<a href="{% url 'suggest' %}">Suggest Cuisine</a> -->
+"""
