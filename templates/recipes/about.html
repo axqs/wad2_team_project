@@ -1,11 +1,13 @@
-{% extends 'recipe/base.html' &}
+{% extends 'recipes/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
-    About
+  About
+>>>>>>> 43c0d26f559a8c1b6c433f06573fe2d4d62570a3
 {% endblock %}
 
 {% block body_block %}
+
 
 <body>
 
@@ -18,3 +20,20 @@
         <h4> This website was designed by Lynda, Amy, Qiufei and Eve </h4>
         
         
+=======
+  <p>superuser username: wad2 password: wad2teamproject</p>
+
+  <h3>Chefs</h3>
+  {% if chefs %}
+    <ul>
+      {% for chef in chefs %}
+        <li>
+          {{ chef.user.get_full_name }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <strong>There are no chefs present.</strong>
+  {% endif %}
+
+{% endblock %}

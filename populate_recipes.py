@@ -8,11 +8,13 @@ from django.contrib.auth.models import User
 cat_objects = {}
 admin_objects = {}
 def populate():
+    reviews = {"Best pancakes" : {"author" : "q_smart", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
+    }
     admins = {
-        "lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller"},
-        "amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes"},
-        "eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan"},
-        "q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart"},}
+        "lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True},
+        "amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True},
+        "eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True},
+        "q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True},}
     breakfast_recipes = [
         {"name": "Pancakes",
          "cook_time" : 15,
@@ -93,10 +95,12 @@ def populate():
             "Cuisines": cuisines,
             "Special Occasions": {"recipes": special_recipes, "likes": 16 },}
 
+    print(" -Initializing admins . . .")
     for admin, admin_data in admins.items():
-        u = add_chef(admin,admin_data)
+        u = add_user(admin,admin_data)
         admin_objects[admin] = u
 
+    print(" -Creating Categories . . .")
     for cat, cat_data in cats.items():
         if(cat == "Cuisines"):
             c = add_cat(cat, 0, 'CAT', None)
@@ -108,6 +112,7 @@ def populate():
             c = add_cat(cat,cat_data["likes"], 'CAT', None)
             cat_objects[cat] = c
 
+    print(" -Adding recipes . . .")
     for cat, cat_data in cats.items():
         if(cat == "Cuisines"):
             for subcat, subcat_data in cat_data.items():
@@ -117,18 +122,23 @@ def populate():
             for r in cat_data["recipes"]:
                 add_recipe(r["cats"], r["name"], r["cook_time"], r["chef"])
 
+    print(" -Adding reviews . . .")
+    for review, review_data in reviews.items():
+        r = add_review(review,review_data)
+
 def add_recipe(cats_lst, name, cook_time, chef):
     r = Recipe.objects.get_or_create(chef=admin_objects[chef], name=name)[0]
     r.name = name
     r.cook_time = cook_time
     cats_lst = cats_lst.split(", ")
-    print(name,cats_lst)
+    print("   ",name,cats_lst)
     for c in cats_lst:
         r.categories.add(cat_objects[c])
     r.save()
     return r
 
 def add_cat(name, likes, type, supercat):
+    print("   ",name, type)
     if type == 'SUB':
         c = Category.objects.get_or_create(name=name, type=type, supercat=supercat)[0]
     else:
@@ -137,15 +147,37 @@ def add_cat(name, likes, type, supercat):
     c.save()
     return c
 
-def add_chef(username, user_data):
-    user = Chef.objects.get_or_create(username=username)[0]
+def add_user(username, user_data):
+    user = User.objects.get_or_create(username=username)[0]
     user.email = user_data["email"]
-    user.password = user_data["password"]
-    user.fname = user_data["fname"]
-    user.lname = user_data["lname"]
+    user.set_password(user_data["password"])
+    user.first_name = user_data["fname"]
+    user.last_name = user_data["lname"]
+    user.is_staff = True
     user.save()
+    if(user_data["chef"]):
+        add_chef(user)
     return user
+
+def add_chef(user):
+    chef = Chef.objects.get_or_create(user=user)[0]
+    chef.save()
+    return chef
+
+def add_review(title,review_data):
+    recipe_chef = review_data["chef"]
+    recipe_name = review_data["recipe"]
+    author = review_data["author"]
+    rating = review_data["rating"]
+
+    recipe = Recipe.objects.get(chef=admin_objects[recipe_chef], name=recipe_name)
+    review = Review.objects.get_or_create(recipe=recipe, author=admin_objects[author])[0]
+    review.title = title
+    review.rating = review_data["rating"]
+    review.save()
+    return review
 
 if __name__ == '__main__':
     print("Starting Rango population script...")
     populate()
+    print("Population complete.")
