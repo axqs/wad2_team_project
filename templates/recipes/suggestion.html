@@ -1,0 +1,16 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Make a Suggestion
+{% endblock %}
+
+{% block body_block %}
+
+<h1> Suggest a Category </h1>
+    <form id="suggestion_form" method="post" action={% url 'suggestion' %}>
+      {% csrf_token %}
+      Suggestion: <input type="text" name="suggestion" value=""/>
+		<input type="submit" name="submit" value="Submit" />
+	</form>
+{% endblock %}

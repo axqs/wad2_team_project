@@ -68,11 +68,25 @@ def user_login(request):
                 return HttpResponse("Your Rango account is disabled.")
         else:
             print("Invalid ligin details: {0},{1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            return HttpResponseRedirect(reverse('index'))
     else:
         return render(request, 'recipes/login.html', {})
-        
+
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def suggestion(request):
+    form = SuggestForm()
+    if request.method == 'POST':
+        form = SuggestForm(data=request.POST)
+        if form.is_valid():
+            suggestion = form.save(commit=False)
+            suggestion.author = request.user
+            suggestion.save()
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            print(form.errors)
+    return render(request, 'recipes/suggestion.html', {})

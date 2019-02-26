@@ -60,4 +60,4 @@ class Review(models.Model):
 
 class Suggestion(models.Model):
     author = models.ForeignKey(User)
-    comment = models.TextField(default="")
+    comment = models.TextField(default=" I love this website!")

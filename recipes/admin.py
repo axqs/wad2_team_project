@@ -12,8 +12,11 @@ class CategoryAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('recipe','author','rating','comment')
 
+class SuggestionAdmin(admin.ModelAdmin):
+    list_display = ('comment','author')
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Chef)
-admin.site.register(Suggestion)
+admin.site.register(Suggestion, SuggestionAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Review, ReviewAdmin)

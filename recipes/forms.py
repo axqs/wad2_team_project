@@ -26,7 +26,7 @@ class ReviewForm(forms.ModelForm):
         exclude = ('recipe','author','date_posted')
 
 class SuggestForm(forms.ModelForm):
-    comment = forms.CharField(help_text="Leave a suggestion for a new cuisine or occasion!")
+    comment = forms.CharField(widget=forms.TextInput(), help_text="Leave a suggestion for a new cuisine or occasion!", required=False)
 
     class Meta:
         model = Suggestion
