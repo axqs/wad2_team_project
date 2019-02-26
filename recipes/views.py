@@ -23,8 +23,56 @@ def index(request):
 
 def about(request):
     #get users that are chefs -- order alphabetically by username
-    chefs = Chef.objects.order_by('user')
+    chefs = Chef.objects.all()
     context_dict = {'chefs':chefs}
 
     response = render(request,'recipes/about.html', context=context_dict)
     return response
+
+def register(request):
+    registered = False
+    if request.method=='POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = ChefForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            if 'photo' in request.FILES:
+                profile.photo = request.FILES['photo']
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = ChefForm()
+    return render(request, 'recipes/register.html',{'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        print(user)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("Your Rango account is disabled.")
+        else:
+            print("Invalid ligin details: {0},{1}".format(username, password))
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'recipes/login.html', {})
+        
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))

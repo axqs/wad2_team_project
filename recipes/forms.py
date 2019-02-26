@@ -25,6 +25,13 @@ class ReviewForm(forms.ModelForm):
         model = Review
         exclude = ('recipe','author','date_posted')
 
+class SuggestForm(forms.ModelForm):
+    comment = forms.CharField(help_text="Leave a suggestion for a new cuisine or occasion!")
+
+    class Meta:
+        model = Suggestion
+        fields = ('comment',)
+
 #asls for name of recipe, a photo, and cook time of recipe
 class RecipeForm(forms.ModelForm):
     CATEGORIES =(
@@ -71,7 +78,7 @@ top
 <!-- <a href="{% url 'trending' %}">Trending</a>
 <a href="{% url 'categories' %}">Categories</a>
 <a href="{% url 'login' %}">Login/a>
-<a href="{% url 'signup' %}">Sign Up</a> -->
+-->
 
 bottom
 <!-- <a href="{% url 'contact' %}">Contact Us</a>

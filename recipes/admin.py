@@ -14,5 +14,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Chef)
+admin.site.register(Suggestion)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Review, ReviewAdmin)
