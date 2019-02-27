@@ -26,7 +26,7 @@ class ReviewForm(forms.ModelForm):
         exclude = ('recipe','author','date_posted')
 
 class SuggestForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.TextInput(), help_text="Leave a suggestion for a new cuisine or occasion!", required=False)
+    comment = forms.CharField(widget=forms.Textarea(), help_text="Leave a suggestion for a new cuisine or occasion!", required=False)
 
     class Meta:
         model = Suggestion
@@ -49,7 +49,7 @@ class RecipeForm(forms.ModelForm):
     )
     name = forms.CharField(widget=forms.TextInput(), help_text="Name of your recipe")
     photo = forms.ImageField()
-    cook_time = forms.IntegerField(min_value=0)
+    cook_time = forms.IntegerField(min_value=0, initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES)
 
