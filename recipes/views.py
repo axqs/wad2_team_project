@@ -90,3 +90,14 @@ def suggestion(request):
         else:
             print(form.errors)
     return render(request, 'recipes/suggestion.html', {})
+
+def contact(request):
+    form = ContactForm()
+    if request.method == 'POST':
+        form = ContactForm(data=request.POST)
+        if form.is_valid():
+            suggestion = form.save(commit=True)
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            print(form.errors)
+    return render(request, 'recipes/contact.html', {})
