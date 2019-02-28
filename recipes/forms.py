@@ -43,7 +43,7 @@ class ContactForm(forms.ModelForm):
         fields = ('first_name','last_name','email','comment')
 
 #asls for name of recipe, a photo, and cook time of recipe
-class RecipeForm(forms.ModelForm):
+class AddRecipeForm(forms.ModelForm):
     CATEGORIES =(
         ("1","Breakfast"),
         ("2","Lunch"),

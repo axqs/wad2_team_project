@@ -101,3 +101,20 @@ def contact(request):
         else:
             print(form.errors)
     return render(request, 'recipes/contact.html', {})
+
+def addrecipe(request):
+    form = AddRecipeForm()
+    if request.method == 'POST':
+        form = AddRecipeForm(data=request.POST)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.chef = request.user.username
+            cats = form.cleaned_data.get('categories')
+            for cat in cats:
+                category = Category.objects.get(id=cat)
+                recipes.categories.add(category)
+            recipe.save()
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            print(form.errors)
+    return render(request, 'recipes/addrecipe.html', {'form':form} )

@@ -8,20 +8,9 @@
 {% block body_block %}
 
 <h2> New Recipe </h2>
-    <form id="recipe" method="post" action={% url 'addrecipe' %}>
-      {% csrf_token %}
-      Name: <input type="text" name="name" value=""/>
-        <br />
-
-        
-      Category: <input type="text" name="category" value=""/>
-        <br />
-        
-      Cook Time: <input type="text" name="cooktime" value=""/>
-        <br />
-        
-      Photo: <input type="image"/>
-        <br />
-        
-    <input type="submit" name="submit" value="Submit" />
+  <form id="addrecipe" method="post" action={% url 'addrecipe' %}>
+    {% csrf_token %}
+    {{ form.as_p }}
+  <input type="submit" name="submit" value="Submit" />
 	</form>
+{% endblock %}
