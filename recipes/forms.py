@@ -32,6 +32,16 @@ class SuggestForm(forms.ModelForm):
         model = Suggestion
         fields = ('comment',)
 
+class ContactForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.Textarea(), help_text="First name", required=True)
+    last_name = forms.CharField(widget=forms.Textarea(), help_text="Last name", required=True)
+    email = forms.CharField(widget=forms.EmailInput(), help_text="Email address", required=True)
+    comment = forms.CharField(widget=forms.Textarea(), help_text="Leave your comment or question here.", required=True)
+
+    class Meta:
+        model = Contact
+        fields = ('first_name','last_name','email','comment')
+
 #asls for name of recipe, a photo, and cook time of recipe
 class RecipeForm(forms.ModelForm):
     CATEGORIES =(
@@ -57,7 +67,7 @@ class RecipeForm(forms.ModelForm):
 #if form.is_valid():
 #            cats = form.cleaned_data.get('categories')
 #views part get username
-#def my_view(request):
+#def my_view(requ4est):
 #    username = None
 #    if request.user.is_authenticated():
 #        username = request.user.username

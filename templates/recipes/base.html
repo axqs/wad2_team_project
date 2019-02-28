@@ -27,7 +27,8 @@
     </div>
 
     <div>
-      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'about' %}">About the Creators</a>
+      <a href="{% url 'contact' %}">Contact Us</a>
       {% if user.is_authenticated %}
         <a href="{% url 'suggestion' %}">Suggest Category</a>
       {% endif %}
