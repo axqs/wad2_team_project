@@ -1,0 +1,23 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Contact Us
+{% endblock %}
+
+{% block body_block %}
+
+<h1> Contact us </h1>
+    <form id="contactus_form" method="post" action={% url 'contactus' %}>
+      {% csrf_token %}
+      Email Address: <input type="text" name="email" value="" size="50"/>
+        <br />
+      First Name: <input type="text" name="firstname" value="" size="50" />
+		<br />
+      Surname: <input type="password" name="surname" value="" size="50" />
+		<br />
+      Message: <input type="password" name="message" value="" height="100" width="50" />
+		<br />
+		<input type="submit" name="submit" value="Submit" />
+	</form>
+{% endblock %}
