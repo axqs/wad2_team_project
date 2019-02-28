@@ -15,85 +15,82 @@ def populate():
         "amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True},
         "eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True},
         "q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True},}
-    breakfast_recipes = [
+    recipes = [
         {"name": "Pancakes",
          "cook_time" : 15,
          "cats" : "Breakfast, American",
          "chef": "lynda_faller",
-         },]
-    lunch_recipes = [
+         },
         {"name": "Chicken Pesto Panini",
          "cook_time" : 10,
          "cats" : "Lunch, American",
          "chef": "eve_ohagan",
-         },]
-    dinner_recipes = [
+         },
         {"name": "All-American Burger",
          "cook_time" : 25,
-         "cats" : "Dinner, American",
+         "cats" : "Dinner, American, 4th of July",
          "chef": "q_smart",
-         },]
-    dessert_recipes = [
+         },
         {"name": "Traditional Tiramisu",
          "cook_time" : 30,
          "cats" : "Dessert, Italian",
          "chef": "amy_hynes",
-         },]
-    special_recipes = [
+         },
         {"name": "St Paddy's Shake",
          "cook_time" : 35,
-         "cats" : "Special Occasions, Dessert",
+         "cats" : "Special Occasions, Dessert, St Patrick's Day",
          "chef": "eve_ohagan",
-         },]
-    italy_recipes = [
+         },
         {"name": "Spaaghetti Carbonara",
          "cook_time" : 35,
          "cats" : "Dinner, Italian",
          "chef": "amy_hynes",
-         },]
-    usa_recipes = [
+         },
         {"name": "Classic Hot Dogs",
          "cook_time" : 30,
-         "cats" : "Lunch, American",
+         "cats" : "Lunch, American, 4th of July",
          "chef": "lynda_faller",
-         },]
-    mex_recipes = [
+         },
         {"name": "Old School Beef Tacos",
          "cook_time" : 30,
          "cats" : "Dinner, Mexican",
          "chef": "amy_hynes",
-         },]
-    china_recipes = [
+         },
         {"name": "Easy Chicken Chow Mein",
          "cook_time" : 40,
          "cats" : "Dinner, Chinese",
          "chef": "lynda_faller",
-         },]
-    india_recipes = [
+         },
         {"name": "Chicken Curry",
          "cook_time" : 45,
          "cats" : "Dinner, Indian",
          "chef": "eve_ohagan",
-         },]
-    japan_recipes = [
+         },
         {"name": "California Rolls",
          "cook_time" : 50,
          "cats" : "Lunch, Japanese",
          "chef": "q_smart",
          },]
-    cuisines = {"Italian": {"recipes": italy_recipes, "likes": 64 },
-            "American": {"recipes": usa_recipes, "likes": 32 },
-            "Mexican": {"recipes": mex_recipes, "likes": 16 },
-            "Chinese": {"recipes": china_recipes, "likes": 16 },
-            "Indian": {"recipes": india_recipes, "likes": 16 },
-            "Japanese": {"recipes": japan_recipes, "likes": 16 },}
+    cuisines = {"Italian": {"likes": 64 },
+            "American": {"likes": 32 },
+            "Mexican": {"likes": 16 },
+            "Chinese": {"likes": 16 },
+            "Indian": {"likes": 16 },
+            "Japanese": {"likes": 16 },}
 
-    cats = {"Breakfast": {"recipes": breakfast_recipes, "likes": 64 },
-            "Lunch": {"recipes": lunch_recipes, "likes": 32 },
-            "Dinner": {"recipes": dinner_recipes, "likes": 16 },
-            "Dessert": {"recipes": dessert_recipes, "likes": 16 },
-            "Cuisines": cuisines,
-            "Special Occasions": {"recipes": special_recipes, "likes": 16 },}
+    specials = {"St Patrick's Day": {"likes": 64 },
+            "Easter": {"likes": 32 },
+            "Christmas": {"likes": 16 },
+            "Halloween": {"likes": 16 },
+            "4th of July": {"likes": 16 },
+            "Valentine's Day": {"likes": 16 },}
+
+    cats = {"Breakfast": {"likes": 64 },
+            "Lunch": {"likes": 32 },
+            "Dinner": {"likes": 16 },
+            "Dessert": {"likes": 16 },
+            "Cuisines": {"likes":160},
+            "Special Occasions": {"likes": 16 },}
 
     print(" -Initializing admins . . .")
     for admin, admin_data in admins.items():
@@ -102,25 +99,21 @@ def populate():
 
     print(" -Creating Categories . . .")
     for cat, cat_data in cats.items():
-        if(cat == "Cuisines"):
-            c = add_cat(cat, 0, 'CAT', None)
-            cat_objects[cat] = c
-            for cuisine, cuisine_data in cuisines.items():
-                sc = add_cat(cuisine, cuisine_data["likes"], 'SUB', c)
-                cat_objects[cuisine] = sc
-        else:
             c = add_cat(cat,cat_data["likes"], 'CAT', None)
             cat_objects[cat] = c
 
+    print(" -Creating Subcategories . . .")
+    for cuisine, cuisine_data in cuisines.items():
+            c = add_cat(cuisine,cuisine_data["likes"], 'SUB', cat_objects["Cuisines"])
+            cat_objects[cuisine] = c
+
+    for spec, spec_data in specials.items():
+            c = add_cat(spec,spec_data["likes"], 'SUB', cat_objects["Special Occasions"])
+            cat_objects[spec] = c
+
     print(" -Adding recipes . . .")
-    for cat, cat_data in cats.items():
-        if(cat == "Cuisines"):
-            for subcat, subcat_data in cat_data.items():
-                for r in subcat_data["recipes"]:
-                    add_recipe(r["cats"], r["name"], r["cook_time"], r["chef"])
-        else:
-            for r in cat_data["recipes"]:
-                add_recipe(r["cats"], r["name"], r["cook_time"], r["chef"])
+    for recipe in recipes:
+        add_recipe(recipe["cats"], recipe["name"], recipe["cook_time"], recipe["chef"])
 
     print(" -Adding reviews . . .")
     for review, review_data in reviews.items():

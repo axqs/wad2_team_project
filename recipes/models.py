@@ -61,3 +61,9 @@ class Review(models.Model):
 class Suggestion(models.Model):
     author = models.ForeignKey(User)
     comment = models.TextField(default=" I love this website!")
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    comment = models.TextField(default=" I love this website!")
