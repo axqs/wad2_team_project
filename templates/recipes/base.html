@@ -10,30 +10,29 @@
       {% endblock %}
     </title>
 	</head>
-  <div>
+  <div class="header">
     <a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="170" height="90" /></a>
     {% if user.is_authenticated %}
+      <a href="{% url 'addrecipe' %}">Add Recipe</a>
       <a href="{% url 'logout' %}">Logout</a>
     {% else %}
       <a href="{% url 'login' %}">Login</a>
       <a href="{% url 'register' %}">Sign Up</a>
-      <!-- <a href="{% url 'addrecipe' %}">Add Recipe</a> -->
     {% endif %}
   </div>
-	<body style="background-color:#cfe2f3;">
 
+	<body style="background-color:#cfe2f3;">
     <div>
       {% block body_block %}
       {% endblock %}
     </div>
-
-    <div>
-      <a href="{% url 'about' %}">About the Creators</a>
-      <a href="{% url 'contact' %}">Contact Us</a>
-      {% if user.is_authenticated %}
-        <a href="{% url 'suggestion' %}">Suggest Category</a>
-      {% endif %}
-    </div>
-
 	</body>
+
+  <div class="footer">
+    <a href="{% url 'about' %}">About the Creators</a>
+    <a href="{% url 'contact' %}">Contact Us</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'suggestion' %}">Suggest a Category</a>
+    {% endif %}
+  </div>
 </html>

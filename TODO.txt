@@ -1,0 +1,10 @@
+Website todo:
+- put pictures for categories
+- make category display page
+- View Profile page
+- Settings page (to change name, password, email)
+- View recipe and ratings page
+- Trending page
+- finish test cases
+- give rating template (at end of recipe template)
+- favorite recipes for each user

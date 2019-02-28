@@ -55,27 +55,18 @@ class AddRecipeForm(forms.ModelForm):
         ("9","Chinese"),
         ("10","Indian"),
         ("11","Japanese"),
-        ("12","Special Occasions"),
+        ("13","St Patrick's Day"),
+        ("14","Easter"),
+        ("15","Christmas"),
+        ("16","Halloween"),
+        ("17","4th of July"),
+        ("18","Valentine's Day"),
     )
-    name = forms.CharField(widget=forms.TextInput(), help_text="Name of your recipe")
+    name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name")
     photo = forms.ImageField()
-    cook_time = forms.IntegerField(min_value=0, initial=0)
+    cook_time = forms.IntegerField(min_value=0, initial=0,help_text="minuets")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES)
-
-#for view
-#if form.is_valid():
-#            cats = form.cleaned_data.get('categories')
-#views part get username
-#def my_view(requ4est):
-#    username = None
-#    if request.user.is_authenticated():
-#        username = request.user.username
-#for templates i think
-#<form method='post'>
-#    {{ form.as_p }}
-#    <input type='submit' value='submit'>
-#</form>
 
     class Meta:
         model = Recipe
@@ -87,11 +78,9 @@ class AddRecipeForm(forms.ModelForm):
 top
 <!-- <a href="{% url 'trending' %}">Trending</a>
 <a href="{% url 'categories' %}">Categories</a>
-<a href="{% url 'login' %}">Login/a>
+<a href="{% url 'myaccount' %}">My Account</a>
 -->
 
 bottom
-<!-- <a href="{% url 'contact' %}">Contact Us</a>
 <a href="{% url 'faqs' %}">FAQs</a>
-<a href="{% url 'suggest' %}">Suggest Cuisine</a> -->
 """
