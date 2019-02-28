@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^suggestion/$', views.suggestion, name='suggestion'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^addrecipe/$', views.addrecipe, name='addrecipe'),
 ]
