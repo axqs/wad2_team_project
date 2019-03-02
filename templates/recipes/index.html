@@ -2,51 +2,67 @@
 {% load staticfiles %}
 
 {% block title_block %}
-  Index
+	Index
 {% endblock %}
 
 {% block body_block %}
+	{% if user.is_authenticated %}
+		<p>superuser username: wad2 password: wad2teamproject</p>
+	{% endif %}
+	<h3>Recipes</h3>
+	{% if recipes %}
+	<ul>
+	{% for recipe in recipes %}
+	  <li>
+		<a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a> --
+		<a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a>
+	  </li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<strong>There are no recipes present.</strong>
+	{% endif %}
 
-  <p>superuser username: wad2 password: wad2teamproject</p>
-  <h3>Recipes</h3>
-  {% if recipes %}
-  <ul>
-    {% for recipe in recipes %}
-      <li>
-        {{ recipe.name }} -- {{ recipe.chef }}
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <strong>There are no recipes present.</strong>
-  {% endif %}
+	<h3>Dinner Recipes</h3>
+	{% if dinners %}
+	<ul>
+	{% for dinner in dinners %}
+		<li>
+			<a href="{% url 'viewrecipe' dinner.slug %}">{{ dinner.name }}</a> -- <a class="name" href="{% url 'userprofile' dinner.chef.username %}">{{ dinner.chef }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<strong>There are no dinner recipes present.</strong>
+	{% endif %}
 
-  <h3>Dinner Recipes</h3>
-  {% if dinners %}
-  <ul>
-    {% for dinner in dinners %}
-      <li>
-        {{ dinner.name }} -- {{ dinner.chef }}
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <strong>There are no dinner recipes present.</strong>
-  {% endif %}
+	<h3>Categories</h3>
+	{% if cats %}
+	{% for cat in cats %}
+		{% if cat.type == 'SUB' %}
+			<h4 class="cat">{{ cat.supercat }}</h4>
+			<span>{{ cat.name }}, Likes: {{ cat.likes }}, ID: {{ cat.id }}</span><br>
+		{% else %}
+			<h4 class="cat">{{ cat.name }}</h4>
+			<span>Likes: {{ cat.likes }}, ID: {{ cat.id }}</span><br>
+		{% endif %}
+		<img src="{{ MEDIA_URL }}cat_pics/{{ cat.photo }}" alt="Picture of {{ cat.name }}" width="10%"/><br>
+	{% endfor %}
+	{% else %}
+	<strong>There are no categories present.</strong>
+	{% endif %}
 
-  <h3>Categories</h3>
-  {% if cats %}
-  <ul>
-    {% for cat in cats %}
-        {% if cat.type == 'SUB' %}
-          <li>{{ cat.supercat }} -- {{ cat.name }}, Likes: {{ cat.likes }}, ID: {{ cat.id }}</li>
-        {% else %}
-          <li>{{ cat.name }}, Likes: {{ cat.likes }}, ID: {{ cat.id }}</li>
-        {% endif %}
-    {% endfor %}
-  </ul>
-  {% else %}
-    <strong>There are no categories present.</strong>
-  {% endif %}
+	<h3>Reviews</h3>
+	{% if reviews %}
+	<ul>
+	{% for review in reviews %}
+	  <li>
+		<a href="{% url 'viewrecipe' review.recipe.slug %}">{{ review.recipe }}</a> -- <a class="name" href="{% url 'userprofile' review.author.username %}">{{ review.author }}</a>
+	  </li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<strong>There are no reviews present.</strong>
+	{% endif %}
 
 {% endblock %}

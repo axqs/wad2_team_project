@@ -17,25 +17,25 @@ class ChefForm(forms.ModelForm):
 
 #asks for title of rating, actual rating 0-5 decimal, and any additional comments
 class ReviewForm(forms.ModelForm):
-    title = forms.CharField(max_length=128, help_text="Add a title")
-    rating = forms.DecimalField(widget=forms.NumberInput(), min_value=0, max_value=5)
-    comment = forms.CharField(help_text="Any additional comments")
+    title = forms.CharField(widget=forms.TextInput(),max_length=128, label="Title")
+    rating = forms.DecimalField(widget=forms.NumberInput(), min_value=0, max_value=5, required=True, label="Rating 1 to 5")
+    comment = forms.CharField(widget=forms.Textarea(),label="Any additional comments")
 
     class Meta:
         model = Review
         exclude = ('recipe','author','date_posted')
 
 class SuggestForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea(), help_text="Leave a suggestion for a new cuisine or occasion!", required=False)
+    comment = forms.CharField(widget=forms.Textarea(), label="Leave a suggestion for a new cuisine or occasion!", required=False)
 
     class Meta:
         model = Suggestion
         fields = ('comment',)
 
 class ContactForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.Textarea(), help_text="First name", required=True)
-    last_name = forms.CharField(widget=forms.Textarea(), help_text="Last name", required=True)
-    email = forms.CharField(widget=forms.EmailInput(), help_text="Email address", required=True)
+    first_name = forms.CharField(widget=forms.TextInput(), label="First name", required=True)
+    last_name = forms.CharField(widget=forms.TextInput(), label="Last name", required=True)
+    email = forms.CharField(widget=forms.EmailInput(), label="Email address", required=True)
     comment = forms.CharField(widget=forms.Textarea(), help_text="Leave your comment or question here.", required=True)
 
     class Meta:
@@ -62,11 +62,11 @@ class AddRecipeForm(forms.ModelForm):
         ("17","4th of July"),
         ("18","Valentine's Day"),
     )
-    name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name")
+    name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name", required=True)
     photo = forms.ImageField()
-    cook_time = forms.IntegerField(min_value=0, initial=0,help_text="minuets")
+    cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minuets", required=True)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES)
+    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True)
 
     class Meta:
         model = Recipe

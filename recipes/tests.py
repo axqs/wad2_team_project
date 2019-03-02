@@ -11,7 +11,7 @@ import socket
 
 #so this is to be run in the way described in the book, not the complicated way with rango_tests folder!
 #take tests from rango_tests folder for ideas but for actual tests u want one file
-#The django mini book tests are as below 
+#The django mini book tests are as below
 #Make tests based on not chapter but on page view, so sort these out based on
 #the view they belong to
 
@@ -22,14 +22,6 @@ from django.contrib.staticfiles import finders
 from recipes.models import Chef, Category, Recipe, Review, Suggestion
 import populate_recipes
 #import recipes.test_utils as test_utils
-
-# Thanks to Enzo Roiz https://github.com/enzoroiz who made these tests during an internship with us
-
-# The following tests are adapted from the textbook: How to Tango With Django
-#TO CREATE YOUR OWN TESTS: READ THESE LINKS
-#https://docs.djangoproject.com/en/2.1/topics/testing/overview/
-#https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing
-
 
 class NeighbourhoodCookbookGeneralTests(TestCase):
 
@@ -50,23 +42,23 @@ class NeighbourhoodCookbookIndexPageTests(TestCase):
             print('The function populate() does not exist or is not correct')
         except:
             print('Something went wrong in the populate() function :-(')
-        
-        
+
+
     def get_category(self, name):
-        
+
         from recipes.models import Category
-        try:                  
+        try:
             cat = Category.objects.get(name=name)
-        except Category.DoesNotExist:    
+        except Category.DoesNotExist:
             cat = None
         return cat
-    #2       
+    #2
     def test_index_contains_welcome_message(self):
         # Check if there is a welcome message
         print(TestCase)
         response = self.client.get(reverse('index'))
         self.assertIn(b'Welcome', response.content)
-    #3        
+    #3
     def test_index_using_template(self):
         # Check the template used to render index page
         response = self.client.get(reverse('index'))
@@ -100,13 +92,13 @@ class NeighbourhoodCookbookAboutPageTests(TestCase):
 ##            print('The function populate() does not exist or is not correct')
 ##        except:
 ##            print('Something went wrong in the populate() function :-(')
-##        
+##
     def get_category(self, name):
-        
+
         from recipes.models import Category
-        try:                  
+        try:
             cat = Category.objects.get(name=name)
-        except Category.DoesNotExist:    
+        except Category.DoesNotExist:
             cat = None
         return cat
     #7
@@ -120,20 +112,20 @@ class NeighbourhoodCookbookAboutPageTests(TestCase):
         # Check if in the about page contains an image
         response = self.client.get(reverse('about'))
         self.assertIn(b'img', response.content)
-        
-    #9              
+
+    #9
     def test_about_contain_profile_image(self):
         # Check if is there an image of at least one of us on the about page
         response = self.client.get(reverse('about'))
         self.assertIn(b'img src="/media/profile_pics', response.content)
-        
+
     #10
     def test_about_using_template(self):
         # Check the template used to render index page
-        # Exercise from Chapter 4 
+        # Exercise from Chapter 4
         response = self.client.get(reverse('about'))
         self.assertTemplateUsed(response, 'recipes/about.html')
-        
+
 class NeighbourhoodCookbookModelTests(TestCase):
 
     def setUp(self):
@@ -146,70 +138,70 @@ class NeighbourhoodCookbookModelTests(TestCase):
             print('The function populate() does not exist or is not correct')
         except:
             print('Something went wrong in the populate() function :-(')
-        
-        
+
+
     def get_category(self, name):
-        
+
         from recipes.models import Category
-        try:                  
+        try:
             cat = Category.objects.get(name=name)
-        except Category.DoesNotExist:    
+        except Category.DoesNotExist:
             cat = None
         return cat
-    
+
     #11
     def test_cuisines_cat_added(self):
-        cat = self.get_category('Cuisines')  
+        cat = self.get_category('Cuisines')
         self.assertIsNotNone(cat)
 
-    #12    
+    #12
     def test_special_occasions_cat_added(self):
-        cat = self.get_category('Special Occasions')  
+        cat = self.get_category('Special Occasions')
         self.assertIsNotNone(cat)
-    #13        
+    #13
     def test_dessert_cat_added(self):
-        cat = self.get_category('Dessert')  
+        cat = self.get_category('Dessert')
         self.assertIsNotNone(cat)
-        
+
     #14
     def test_breakfast_cat_added(self):
-        cat = self.get_category('Breakfast')  
+        cat = self.get_category('Breakfast')
         self.assertIsNotNone(cat)
     #15
     def test_lunch_cat_added(self):
-        cat = self.get_category('Lunch')  
+        cat = self.get_category('Lunch')
         self.assertIsNotNone(cat)
     #16
     def test_dinner_cat_added(self):
-        cat = self.get_category('Dinner')  
+        cat = self.get_category('Dinner')
         self.assertIsNotNone(cat)
-    #17        
+    #17
     def test_cuisines_cat_with_likes(self):
         cat = self.get_category('Cuisines')
         self.assertEqual(cat.likes, 0)
 
-    #18       
+    #18
     def test_special_occasions_cat_with_likes(self):
         cat = self.get_category('Special Occasions')
         self.assertEqual(cat.likes, 16)
-    #19       
+    #19
     def test_dessert_cat_with_likes(self):
         cat = self.get_category('Dessert')
         self.assertEqual(cat.likes, 16)
-    #20       
+    #20
     def test_breakfast_cat_with_likes(self):
         cat = self.get_category('Breakfast')
         self.assertEqual(cat.likes, 64)
-    #21       
+    #21
     def test_lunch_cat_with_likes(self):
         cat = self.get_category('Lunch')
         self.assertEqual(cat.likes, 32)
-    #22       
+    #22
     def test_dinner_cat_with_likes(self):
         cat = self.get_category('Dinner')
         self.assertEqual(cat.likes, 16)
-        
-#class NeighbourhoodCookbookViewTests(TestCase): 
+
+#class NeighbourhoodCookbookViewTests(TestCase):
 
 class NeighbourhoodOtherViewTests(TestCase):
 
@@ -241,14 +233,14 @@ class NeighbourhoodOtherViewTests(TestCase):
         self.assertIn('name', RecipeAdmin.list_display)
         self.assertIn('cook_time', RecipeAdmin.list_display)
         self.assertIn('chef', RecipeAdmin.list_display)
-        
+
     #24
     # check admin interface: Category
     def test_admin_interface_category_view(self):
         from recipes.admin import CategoryAdmin
         self.assertIn('slug', CategoryAdmin.prepopulated_fields)
  #       self.assertIn('type', CategoryAdmin.prepopulated_fields)
-        
+
     #25
     # check admin interface: Review
     def test_admin_interface_review_view(self):
@@ -257,14 +249,14 @@ class NeighbourhoodOtherViewTests(TestCase):
         self.assertIn('author', ReviewAdmin.list_display)
         self.assertIn('rating', ReviewAdmin.list_display)
         self.assertIn('comment', ReviewAdmin.list_display)
-        
+
     #26
     # check admin interface
     def test_admin_interface_suggestion_view(self):
         from recipes.admin import SuggestionAdmin
         self.assertIn('comment', SuggestionAdmin.list_display)
         self.assertIn('author', SuggestionAdmin.list_display)
-        
+
     #27
     # test the slug field works..
     def test_does_slug_field_work(self):
@@ -272,16 +264,16 @@ class NeighbourhoodOtherViewTests(TestCase):
         cat = Category(name='how do i create a slug in django')
         cat.save()
         self.assertEqual(cat.slug,'how-do-i-create-a-slug-in-django')
-        
+
     #28
     # are categories displayed on index page?
     def category_displayed_in_index(self):
-        cat = self.get_category('Cuisines')  
+        cat = self.get_category('Cuisines')
         if (self.assertIsNotNone(cat)):
             # Check if in the categories page contains a category
             response = self.client.get(reverse('categories'))
             self.assertIn(cat, response.content)
-        
+
 
 class NCChapter6ViewTests(TestCase):
 
@@ -345,7 +337,7 @@ class NCChapter7ViewTests(TestCase):
 
 
     # test if the add_page.html template exists.
-    
+
 #--------------------------------------------------------------------------------
 #original ch 3 tests
 class NeighborhoodCookbookLiveServerTests(StaticLiveServerTestCase):
@@ -355,7 +347,7 @@ class NeighborhoodCookbookLiveServerTests(StaticLiveServerTestCase):
         chrome_options.add_argument('headless')
         self.browser = webdriver.Chrome(chrome_options = chrome_options)
         self.browser.implicitly_wait(3)
-        
+
     @classmethod
     def setUpClass(cls):
         cls.host = socket.gethostbyname(socket.gethostname())
@@ -365,7 +357,7 @@ class NeighborhoodCookbookLiveServerTests(StaticLiveServerTestCase):
         self.browser.refresh()
         self.browser.quit()
 
-        
+
  #ALL the navigation testing
     #29
     def test_navigate_from_index_to_about(self):
@@ -410,7 +402,7 @@ class NeighborhoodCookbookLiveServerTests(StaticLiveServerTestCase):
         contact_us_link.click()
         #Check if it goes back to the home page
         self.assertIn(url + reverse('contactus'), self.browser.current_url)
-        
+
     #32
     def test_navigate_from_contactus_to_index(self):
         # Go to recipes main page
@@ -647,8 +639,8 @@ class Chapter5ModelTests(TestCase):
         self.assertEquals(only_poll_in_database, cat)
 
     def test_create_pages_for_categories(self):
-        
-        #errors says it needs an id field: answer to this is in populate_recipes.py 
+
+        #errors says it needs an id field: answer to this is in populate_recipes.py
         cat = Category(name="new_category_test")
         cat.save()
 
@@ -659,7 +651,7 @@ class Chapter5ModelTests(TestCase):
  #       new_category_recipe.cats
         new_category_recipe.name="Best Double Chocolate Chip Brownies"
         new_category_recipe.cook_time= 50
-        
+
         #ValueError: Cannot assign "'new_chef'": "Recipe.chef" must be a "User" instance.
           #need to adapt from this in populate_recipes:
           #for a chef: r = Recipe.objects.get_or_create(chef=admin_objects[chef], name=name)[0]
