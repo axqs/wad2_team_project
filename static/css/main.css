@@ -1,0 +1,26 @@
+html {
+	background-color: #467DA2;
+}
+h2 {
+	font-family: monospace;
+}
+
+h3 {
+	color: #8E7262;
+}
+
+a, li, h4{
+	color: #3A1003;
+	text-decoration: none;
+}
+
+a.name, span {
+	color: #773D1B;
+}
+
+p { color: #09203D; }
+
+a.base{
+	text-decoration: underline;
+	color: #09203D;
+}

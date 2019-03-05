@@ -2,5 +2,28 @@
 {% load staticfiles %}
 
 {% block title_block %}
+<<<<<<< HEAD
     Trending
 {% endblock %}
+=======
+	Trending
+{% endblock %}
+
+{% block body_block %}
+
+	<h3>Trending</h3>
+	{% if recipes %}
+		<ul>
+			{% for recipe in recipes %}
+				<li>
+				<a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a> --
+				<a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<strong>There are no trending recipes.</strong>
+	{% endif %}
+
+{% endblock %}
+>>>>>>> 0817c574f8e5d8347065ff2534da9ee170db6d36

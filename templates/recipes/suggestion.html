@@ -9,8 +9,12 @@
 
 <h1> Suggest a Category </h1>
     <form id="suggestion_form" method="post" action={% url 'suggestion' %}>
-      {% csrf_token %}
-      Suggestion: <input type="text" name="suggestion" value=""/>
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+			{{ field.errors }}
+			{{ field.label }}<br>
+			{{ field }}<br>
+		{% endfor %}
 		<input type="submit" name="submit" value="Submit" />
 	</form>
 
