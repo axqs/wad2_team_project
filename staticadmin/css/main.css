@@ -1,5 +1,7 @@
+/* to activate, run: python manage.py collectstatic --noinput --clear */
+
 html {
-	background-color: #000000;
+	background-color: #467DA2;
 }
 h2 {
 	font-family: monospace;

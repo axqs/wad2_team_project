@@ -1,4 +1,4 @@
-/* to activate, run: python manage.py collectstatic --noinput */
+/* to activate, run: python manage.py collectstatic --noinput --clear */
 
 html {
 	background-color: #467DA2;

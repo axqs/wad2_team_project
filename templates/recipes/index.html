@@ -20,30 +20,16 @@
 	{% endfor %}
 	</ul>
 	{% else %}
-	<strong>There are no recipes present.</strong>
+		<strong>There are no recipes present.</strong>
 	{% endif %}
 
-  <p>superuser username: wad2 password: wad2teamproject</p>
-
-
-  <h3>Recipes</h3>
-  {% if recipes %}
-  <ul>
-    {% for recipe in recipes %}
-      <li>
-        {{ recipe.name }} -- {{ recipe.chef }}
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <strong>There are no recipes present.</strong>
-  {% endif %}
 	<h3>Dinner Recipes</h3>
 	{% if dinners %}
 	<ul>
 	{% for dinner in dinners %}
 		<li>
-			<a href="{% url 'viewrecipe' dinner.slug %}">{{ dinner.name }}</a> -- <a class="name" href="{% url 'userprofile' dinner.chef.username %}">{{ dinner.chef }}</a>
+			<a href="{% url 'viewrecipe' dinner.slug %}">{{ dinner.name }}</a> --
+			<a class="name" href="{% url 'userprofile' dinner.chef.username %}">{{ dinner.chef }}</a>
 		</li>
 	{% endfor %}
 	</ul>
