@@ -11,10 +11,10 @@ def populate():
 	reviews = {"Best pancakes" : {"author" : "lynda_faller", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
 	}
 	admins = {
-		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True},
-		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True},
-		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True},
-		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True},}
+		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True, "photo":"anon.png",},
+		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True, "photo":"anon.png",},
+		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True, "photo":"anon.png",},
+		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True, "photo":"anon.png",},}
 	recipes = [
 		{"name": "Pancakes",
 		"cook_time" : 15,
@@ -162,11 +162,12 @@ def add_user(username, user_data):
 	user.is_staff = True
 	user.save()
 	if(user_data["chef"]):
-		add_chef(user)
+		add_chef(user,user_data)
 	return user
 
-def add_chef(user):
+def add_chef(user,user_data):
 	chef = Chef.objects.get_or_create(user=user)[0]
+	chef.photo = user_data["photo"]
 	chef.save()
 	return chef
 

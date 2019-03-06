@@ -13,7 +13,7 @@ h3 {
 
 a, li, h4{
 	color: #3A1003;
-	text-decoration: none;
+	text-decoration: line-through;
 }
 
 a.name, span {
