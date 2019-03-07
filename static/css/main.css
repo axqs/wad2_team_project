@@ -16,7 +16,7 @@ a, li, h4{
 	text-decoration: underline;
 }
 a:hover{
-	color: white;
+	color: blue;
 	text-decoration: overline;
 }
 

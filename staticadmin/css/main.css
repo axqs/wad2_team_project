@@ -13,7 +13,11 @@ h3 {
 
 a, li, h4{
 	color: #3A1003;
-	text-decoration: line-through;
+	text-decoration: underline;
+}
+a:hover{
+	color: white;
+	text-decoration: overline;
 }
 
 a.name, span {
