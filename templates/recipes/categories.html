@@ -1,0 +1,22 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+  Categories
+{% endblock %}
+
+{% block body_block %}
+<h1> Categories </h1>
+
+<div>
+	{% if categories %} 
+	<ul>
+		{% for category in categories %} 
+			<li>{{ category.name }}</li>
+		{% endfor %} 
+	</ul>
+	{% else %}
+		<strong>There are no categories present.</strong>
+	{% endif %} 
+</div>
+{% endblock %}
