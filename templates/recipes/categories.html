@@ -6,17 +6,14 @@
 {% endblock %}
 
 {% block body_block %}
-<h1> Categories </h1>
-
-<div>
-	{% if categories %} 
+	<h3> Categories </h3>
+	{% if cats %}
 	<ul>
-		{% for category in categories %} 
+		{% for category in cats %}
 			<li>{{ category.name }}</li>
-		{% endfor %} 
+		{% endfor %}
 	</ul>
 	{% else %}
 		<strong>There are no categories present.</strong>
-	{% endif %} 
-</div>
+	{% endif %}
 {% endblock %}

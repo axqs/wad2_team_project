@@ -32,19 +32,21 @@ a.base{
 }
 
 div.cat {
+	width:30%;
 	float: left;
-	padding: 5px;
+	padding: 1%;
+}
+
+div.cat img{
+	width: 100%;
 }
 
 div.cat_text{
-	padding: 5px;
+	padding: 2%;
 	position: relative;
 	background-color: white;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-bottom: 5px;
 	text-align: center;
-	bottom: 15px;
+	bottom: 20px;
 }
 
 div.row::after {
