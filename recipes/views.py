@@ -38,6 +38,13 @@ def trending(request):
 
 	return render(request,'recipes/trending.html', {'recipes':recipes})
 
+def categories(request):
+	#get all categories -- no order
+	cats = Category.objects.all()
+	context_dict = {'cats':cats}
+	response = render(request,'recipes/categories.html', context=context_dict)
+	return response
+
 def register(request):
 	registered = False
 	if request.method=='POST':
@@ -167,9 +174,16 @@ def userprofile(request, username):
 
 	return render(request, 'recipes/profile.html', context_dict)
 
-def categories(request):
-	#get all categories -- no order
-	cats = Category.objects.all()
-	context_dict = {'cats':cats}
-	response = render(request,'recipes/categories.html', context=context_dict)
-	return response
+def show_category(request, cat_name_slug):
+    context_dict = {}
+
+    try:
+        cat = Category.objects.get(slug=cat_name_slug)
+        recipes = Recipe.objects.filter(categories=cat)
+        context_dict['recipes'] = recipes
+        context_dict['cat'] = cat
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['recipes'] = None
+        
+    return render(request, 'recipes/category.html', context_dict)

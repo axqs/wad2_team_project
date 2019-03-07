@@ -9,10 +9,14 @@
 <h1> Categories </h1>
 
 <div>
-	{% if categories %} 
+	{% if cats %} 
 	<ul>
-		{% for category in categories %} 
-			<li>{{ category.name }}</li>
+		{% for cat in cats %} 
+			{% if cat.type == 'CAT'%}
+				<li>
+				<a href="/recipes/categories/{{ cat.slug }}">{{ cat.name }}</a>
+				</li>
+			{% endif %}
 		{% endfor %} 
 	</ul>
 	{% else %}
