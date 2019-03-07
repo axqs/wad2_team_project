@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^addrecipe/$', views.addrecipe, name='addrecipe'),
 	url(r'^(?P<recipe_name_slug>[\w\-]+)/$', views.viewrecipe, name='viewrecipe'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.userprofile, name='userprofile'),
+    url(r'^categories/$', views.categories, name='categories'),
 ]

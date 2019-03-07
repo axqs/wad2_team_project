@@ -166,3 +166,10 @@ def userprofile(request, username):
 		context_dict['chef'] = None
 
 	return render(request, 'recipes/profile.html', context_dict)
+
+def categories(request):
+	#get all categories -- no order
+	cats = Category.objects.all()
+	context_dict = {'cats':cats}
+	response = render(request,'recipes/categories.html', context=context_dict)
+	return response
