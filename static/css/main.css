@@ -16,7 +16,7 @@ a, li, h4{
 	text-decoration: underline;
 }
 a:hover{
-	color: blue;
+	color: white;
 	text-decoration: overline;
 }
 
@@ -29,4 +29,28 @@ p { color: #09203D; }
 a.base{
 	text-decoration: underline;
 	color: #09203D;
+}
+
+div.cat {
+	float: left;
+	padding: 5px;
+}
+
+div.cat_text{
+	padding: 5px;
+	position: relative;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	bottom: 15px;
+}
+
+div.row::after {
+	position: relative;
+	align-items: center;
+	content: "";
+	clear: both;
+	display: table;
 }

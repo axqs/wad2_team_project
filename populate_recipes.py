@@ -40,7 +40,7 @@ def populate():
 		"chef" : "amy_hynes",
 		"photo" : "tirimisu.jpeg",
 		},
-		{"name": "St Paddy's Shake",
+		{"name": "Shamrock Shake",
 		"cook_time" : 35,
 		"cats" : "Special Occasions, Dessert, St Patrick's Day",
 		"chef" : "eve_ohagan",
@@ -76,6 +76,12 @@ def populate():
 		"chef" : "eve_ohagan",
 		"photo" : "curry.jpeg",
 		},
+		{"name": "St Paddy's Cupcakes",
+		"cook_time" : 25,
+		"cats" : "Special Occasions, Dessert, St Patrick's Day",
+		"chef" : "q_smart",
+		"photo" : "cupcakes.jpeg",
+		},
 		{"name": "California Rolls",
 		"cook_time" : 50,
 		"cats" : "Lunch, Japanese",
@@ -101,7 +107,7 @@ def populate():
 		"Dinner": {"likes": 16, "photo":"dinner.jpeg"},
 		"Dessert": {"likes": 16, "photo":"dessert.jpeg"},
 		"Cuisines": {"likes":160, "photo":"cuisines.jpeg"},
-		"Special Occasions": {"likes": 16, "photo":"spec_occ.jpeg"},}
+		"Special Occasions": {"likes": 160, "photo":"spec_occ.jpeg"},}
 
 	print(" -Initializing admins . . .")
 	for admin, admin_data in admins.items():
