@@ -179,7 +179,7 @@ def show_category(request, cat_name_slug):
 
     try:
         cat = Category.objects.get(slug=cat_name_slug)
-        recipes = Recipe.objects.filter(categories=cat)
+        recipes = cat.recipe_set.all()
         context_dict['recipes'] = recipes
         context_dict['cat'] = cat
     except Category.DoesNotExist:

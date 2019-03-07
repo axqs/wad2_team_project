@@ -11,8 +11,8 @@
         
         {% if recipes %}
             <ul>
-            {% for recipe in recipe %}
-                 <li><a href="{{ recipe.url }}">{{ recipe.title }}</a></li>
+            {% for recipe in recipes %}
+                 <li><a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a></li>
             {% endfor %}
             </ul>
         {% else %}
