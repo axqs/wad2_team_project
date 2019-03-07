@@ -8,7 +8,8 @@ from django.utils import *
 class Category(models.Model):
 	TYPES = (
 		('CAT', 'Category'),
-		('SUB', 'Subcategory')
+		('CUS', 'Cuisines'),
+		('SPE', 'Special Occasions')
 	)
 	name = models.CharField(max_length=50, unique=True)
 	type = models.CharField(max_length=25, choices=TYPES)

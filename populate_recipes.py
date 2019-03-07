@@ -42,7 +42,7 @@ def populate():
 		},
 		{"name": "Shamrock Shake",
 		"cook_time" : 35,
-		"cats" : "Special Occasions, Dessert, St Patrick's Day",
+		"cats" : "Dessert, St Patrick's Day",
 		"chef" : "eve_ohagan",
 		"photo" : "shake.jpeg",
 		},
@@ -78,7 +78,7 @@ def populate():
 		},
 		{"name": "St Paddy's Cupcakes",
 		"cook_time" : 25,
-		"cats" : "Special Occasions, Dessert, St Patrick's Day",
+		"cats" : "Dessert, St Patrick's Day",
 		"chef" : "q_smart",
 		"photo" : "cupcakes.jpeg",
 		},
@@ -121,11 +121,11 @@ def populate():
 
 	print(" -Creating Subcategories . . .")
 	for cuisine, cuisine_data in cuisines.items():
-		c = add_cat(cuisine,cuisine_data["likes"], 'SUB', cat_objects["Cuisines"], cuisine_data["photo"])
+		c = add_cat(cuisine,cuisine_data["likes"], 'CUS', cat_objects["Cuisines"], cuisine_data["photo"])
 		cat_objects[cuisine] = c
 
 	for spec, spec_data in specials.items():
-		c = add_cat(spec,spec_data["likes"], 'SUB', cat_objects["Special Occasions"], spec_data["photo"])
+		c = add_cat(spec,spec_data["likes"], 'SPE', cat_objects["Special Occasions"], spec_data["photo"])
 		cat_objects[spec] = c
 
 	print(" -Adding recipes . . .")
@@ -150,7 +150,7 @@ def add_recipe(cats_lst, name, cook_time, chef, photo):
 
 def add_cat(name, likes, type, supercat, photo):
 	print("   ",name, type)
-	if type == 'SUB':
+	if type == 'CUS' or type == 'SPE':
 		c = Category.objects.get_or_create(name=name, type=type, supercat=supercat)[0]
 	else:
 		c = Category.objects.get_or_create(name=name, type=type)[0]
