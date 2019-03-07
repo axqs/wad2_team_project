@@ -8,16 +8,23 @@
 {% block body_block %}
     {% if cat %}
         <h1>{{ cat.name }}</h1>
-
-        {% if recipes %}
-            <ul>
-            {% for recipe in recipes %}
-                 <li><a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a></li>
-            {% endfor %}
-            </ul>
+        {% if subcats %}
+        <ul>
+	        {% for subcat in subcats %}
+	            <li><a href="{% url 'show_category' subcat.slug %}">{{ subcat.name }}</a></li>
+	        {% endfor %}
+	    </ul>
         {% else %}
-            <strong>No recipes currently in category.</strong>
-        {% endif %}
+	        {% if recipes %}
+	            <ul>
+	            {% for recipe in recipes %}
+	                 <li><a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a></li>
+	            {% endfor %}
+	            </ul>
+	        {% else %}
+	            <strong>No recipes currently in category.</strong>
+	        {% endif %}
+	    {% endif %}   
     {% else %}
         The specified category does not exist!
     {% endif %}
