@@ -6,12 +6,27 @@
 {% endblock %}
 
 {% block body_block %}
+<<<<<<< HEAD
 	<h3> Categories </h3>
 	{% if cats %}
 	<ul>
 		{% for category in cats %}
 			<li>{{ category.name }}</li>
 		{% endfor %}
+=======
+<h1> Categories </h1>
+
+<div>
+	{% if cats %} 
+	<ul>
+		{% for cat in cats %} 
+			{% if cat.type == 'CAT'%}
+				<li>
+				<a href="/recipes/categories/{{ cat.slug }}">{{ cat.name }}</a>
+				</li>
+			{% endif %}
+		{% endfor %} 
+>>>>>>> 27552a4a73e7d2fd8cb64b2a1326a76e13c70626
 	</ul>
 	{% else %}
 		<strong>There are no categories present.</strong>
