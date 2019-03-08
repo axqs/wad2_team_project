@@ -5,20 +5,20 @@
 	Trending
 {% endblock %}
 
-{% block body_block %}
-
-	<h3>Trending</h3>
-	{% if recipes %}
-		<ul>
-			{% for recipe in recipes %}
-				<li>
-				<a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a> --
-				<a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a>
-				</li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<strong>There are no trending recipes.</strong>
-	{% endif %}
-
+{% block name_block %}
+	Trending
 {% endblock %}
+
+{% block body_block %}
+	{% if recipes %}
+	<div class="row">
+		{% for recipe in recipes %}
+			<div class="cat">
+					<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}"/></a>
+					<div class="cat_text">{{ recipe.name }}</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}
+ut

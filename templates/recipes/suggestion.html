@@ -5,10 +5,12 @@
     Make a Suggestion
 {% endblock %}
 
-{% block body_block %}
+{% block name_block %}
+	Suggest a Category
+{% endblock %}
 
-<h1> Suggest a Category </h1>
-    <form id="suggestion_form" method="post" action={% url 'suggestion' %}>
+{% block body_block %}
+	<form id="suggestion_form" method="post" action={% url 'suggestion' %}>
 		{% csrf_token %}
 		{% for field in form.visible_fields %}
 			{{ field.errors }}
@@ -17,6 +19,4 @@
 		{% endfor %}
 		<input type="submit" name="submit" value="Submit" />
 	</form>
-
-
 {% endblock %}
