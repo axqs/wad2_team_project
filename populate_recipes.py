@@ -11,10 +11,10 @@ def populate():
 	reviews = {"Best pancakes" : {"author" : "lynda_faller", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
 	}
 	admins = {
-		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True},
-		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True},
-		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True},
-		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True},}
+		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True, "photo":"anon.png",},
+		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True, "photo":"anon.png",},
+		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True, "photo":"anon.png",},
+		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True, "photo":"anon.png",},}
 	recipes = [
 		{"name": "Pancakes",
 		"cook_time" : 15,
@@ -40,9 +40,9 @@ def populate():
 		"chef" : "amy_hynes",
 		"photo" : "tirimisu.jpeg",
 		},
-		{"name": "St Paddy's Shake",
+		{"name": "Shamrock Shake",
 		"cook_time" : 35,
-		"cats" : "Special Occasions, Dessert, St Patrick's Day",
+		"cats" : "Dessert, St Patrick's Day",
 		"chef" : "eve_ohagan",
 		"photo" : "shake.jpeg",
 		},
@@ -76,6 +76,12 @@ def populate():
 		"chef" : "eve_ohagan",
 		"photo" : "curry.jpeg",
 		},
+		{"name": "St Paddy's Cupcakes",
+		"cook_time" : 25,
+		"cats" : "Dessert, St Patrick's Day",
+		"chef" : "q_smart",
+		"photo" : "cupcakes.jpeg",
+		},
 		{"name": "California Rolls",
 		"cook_time" : 50,
 		"cats" : "Lunch, Japanese",
@@ -101,7 +107,7 @@ def populate():
 		"Dinner": {"likes": 16, "photo":"dinner.jpeg"},
 		"Dessert": {"likes": 16, "photo":"dessert.jpeg"},
 		"Cuisines": {"likes":160, "photo":"cuisines.jpeg"},
-		"Special Occasions": {"likes": 16, "photo":"spec_occ.jpeg"},}
+		"Special Occasions": {"likes": 160, "photo":"spec_occ.jpeg"},}
 
 	print(" -Initializing admins . . .")
 	for admin, admin_data in admins.items():
@@ -115,11 +121,11 @@ def populate():
 
 	print(" -Creating Subcategories . . .")
 	for cuisine, cuisine_data in cuisines.items():
-		c = add_cat(cuisine,cuisine_data["likes"], 'SUB', cat_objects["Cuisines"], cuisine_data["photo"])
+		c = add_cat(cuisine,cuisine_data["likes"], 'CUS', cat_objects["Cuisines"], cuisine_data["photo"])
 		cat_objects[cuisine] = c
 
 	for spec, spec_data in specials.items():
-		c = add_cat(spec,spec_data["likes"], 'SUB', cat_objects["Special Occasions"], spec_data["photo"])
+		c = add_cat(spec,spec_data["likes"], 'SPE', cat_objects["Special Occasions"], spec_data["photo"])
 		cat_objects[spec] = c
 
 	print(" -Adding recipes . . .")
@@ -144,7 +150,7 @@ def add_recipe(cats_lst, name, cook_time, chef, photo):
 
 def add_cat(name, likes, type, supercat, photo):
 	print("   ",name, type)
-	if type == 'SUB':
+	if type == 'CUS' or type == 'SPE':
 		c = Category.objects.get_or_create(name=name, type=type, supercat=supercat)[0]
 	else:
 		c = Category.objects.get_or_create(name=name, type=type)[0]
@@ -162,11 +168,12 @@ def add_user(username, user_data):
 	user.is_staff = True
 	user.save()
 	if(user_data["chef"]):
-		add_chef(user)
+		add_chef(user,user_data)
 	return user
 
-def add_chef(user):
+def add_chef(user,user_data):
 	chef = Chef.objects.get_or_create(user=user)[0]
+	chef.photo = user_data["photo"]
 	chef.save()
 	return chef
 

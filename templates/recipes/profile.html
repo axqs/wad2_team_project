@@ -5,8 +5,12 @@
   {{ chef.user.username }}
 {% endblock %}
 
+{% block name_block %}
+	{{ chef.user.username }}
+{% endblock %}
+
 {% block body_block %}
-	<img src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}" width="30%"/><br>
+	<img class="profile" src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}" width="30%"/><br>
 	Username: {{ chef.user.username }}<br>
 	Full name: {{ chef.user.get_full_name }}<br>
 	Date joined: {{ chef.user.date_joined }}<br>

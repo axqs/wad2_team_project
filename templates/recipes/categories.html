@@ -2,10 +2,37 @@
 {% load staticfiles %}
 
 {% block title_block %}
+<<<<<<< HEAD
     Categories
 {% endblock %}
 
 {% block body_block %}
 <h2> Categories</h2>
 
+=======
+  Categories
+{% endblock %}
+
+{% block name_block %}
+	Categories
+{% endblock %}
+
+{% block body_block %}
+<div>
+	{% if cats %}
+	<div class="row">
+		{% for cat in cats %}
+			{% if cat.type == 'CAT'%}
+				<div class="cat">
+						<a href="{% url 'show_category' cat.slug %}"><img src="{{ MEDIA_URL }}cat_pics/{{ cat.photo }}" alt="Picture of {{ cat.photo }}"/></a>
+						<div class="cat_text">{{ cat.name }}</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% else %}
+		<strong>There are no categories present.</strong>
+	{% endif %}
+</div>
+>>>>>>> e746c22ef5a058d789d67bbc0571ac8d90851910
 {% endblock %}

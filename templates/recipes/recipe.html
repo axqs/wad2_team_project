@@ -5,44 +5,49 @@
   {{ recipe.name }}
 {% endblock %}
 
+{% block name_block %}
+	{% if recipe %}
+		{{ recipe.name }}
+	{% endif %}
+{% endblock %}
+
 {% block body_block %}
-{% if recipe %}
-	<h2 class="recipe_name">{{ recipe.name }}</h2>
-	Chef: <a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a> -- {{ recipe.date_posted }}<br>
-	Cook time: {{ recipe.cook_time }} min<br>
-	<img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.name }}" width="30%"/>
-{% else %}
-	<strong>This is not a recipe.</strong>
-{% endif %}
+	{% if recipe %}
+		Chef: <a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a> -- {{ recipe.date_posted }}<br>
+		Cook time: {{ recipe.cook_time }} min<br>
+		<img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.name }}" width="30%"/>
+	{% else %}
+		<strong>This is not a recipe.</strong>
+	{% endif %}
 
-<h3>Reviews</h3>
-{% if reviews %}
-	<ul>
-		{% for review in reviews %}
-			<li>
-			{{ review.title }} -- {{ review.rating }}<br>
-			{% if review.comment %}
-				{{ review.comment }}<br>
-			{% endif %}
-			{{ review.author }}, {{ review.date_posted }}
-			</li>
-		{% endfor %}
-	</ul>
-{% else %}
-	<strong>There are no reviews left for this recipe.</strong>
-{% endif %}
+	<h3>Reviews</h3>
+	{% if reviews %}
+		<ul>
+			{% for review in reviews %}
+				<li>
+				{{ review.title }} -- {{ review.rating }}<br>
+				{% if review.comment %}
+					{{ review.comment }}<br>
+				{% endif %}
+				{{ review.author }}, {{ review.date_posted }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<strong>There are no reviews left for this recipe.</strong>
+	{% endif %}
 
 
-{% if user.is_authenticated %}
-	<h2>Leave a Review</h2>
-	<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
-		{% csrf_token %}
-		{% for field in form.visible_fields %}
-		{{ field.errors }}
-			{{ field.label }}<br>
-			{{ field }}<br>
-		{% endfor %}
-		<input type="submit" name="submit" value="Submit" />
-	</form>
-{% endif %}
+	{% if user.is_authenticated %}
+		<h2>Leave a Review</h2>
+		<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
+			{% csrf_token %}
+			{% for field in form.visible_fields %}
+			{{ field.errors }}
+				{{ field.label }}<br>
+				{{ field }}<br>
+			{% endfor %}
+			<input type="submit" name="submit" value="Submit" />
+		</form>
+	{% endif %}
 {% endblock %}
