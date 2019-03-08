@@ -5,17 +5,19 @@
     Register
 {% endblock %}
 
-{% block body_block %}
-  <h1> Register for Neighborhood Cookbook </h1>
+{% block name_block %}
+	Register for the Neighborhood Cookbook!
+{% endblock %}
 
+{% block body_block %}
   {% if registered %}
     <strong> Thank You for Registering! </strong>
     <a href="{% url 'home' %}">Return to the homepage.</a>
     <br />
   {% else %}
-    
+
     <strong>Register here!</strong>
-    
+
     <form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
       {% csrf_token %}
       {{ user_form.as_p }}

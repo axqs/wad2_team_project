@@ -5,6 +5,10 @@
 	Index
 {% endblock %}
 
+{% block name_block %}
+	<img src="{% static "images/logo.png" %}" alt="Website Logo" width="370"/>
+{% endblock %}
+
 {% block body_block %}
 	{% if user.is_authenticated %}
 		<p>superuser username: wad2 password: wad2teamproject</p>
@@ -35,22 +39,6 @@
 	</ul>
 	{% else %}
 	<strong>There are no dinner recipes present.</strong>
-	{% endif %}
-
-	<h3>Categories</h3>
-	{% if cats %}
-	{% for cat in cats %}
-		{% if cat.type == 'CUS' or cat.type == 'SPE' %}
-			<h4 class="cat">{{ cat.supercat }}</h4>
-			<span>{{ cat.name }}, Likes: {{ cat.likes }}, ID: {{ cat.id }}</span><br>
-		{% else %}
-			<h4 class="cat">{{ cat.name }}</h4>
-			<span>Likes: {{ cat.likes }}, ID: {{ cat.id }}</span><br>
-		{% endif %}
-		<img src="{{ MEDIA_URL }}cat_pics/{{ cat.photo }}" alt="Picture of {{ cat.name }}" width="10%"/><br>
-	{% endfor %}
-	{% else %}
-	<strong>There are no categories present.</strong>
 	{% endif %}
 
 	<h3>Reviews</h3>

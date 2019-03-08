@@ -5,22 +5,25 @@
   Categories
 {% endblock %}
 
-{% block body_block %}
-<h1> Categories </h1>
+{% block name_block %}
+	Categories
+{% endblock %}
 
+{% block body_block %}
 <div>
-	{% if cats %} 
-	<ul>
-		{% for cat in cats %} 
+	{% if cats %}
+	<div class="row">
+		{% for cat in cats %}
 			{% if cat.type == 'CAT'%}
-				<li>
-				<a href="{% url 'show_category' cat.slug %}">{{ cat.name }}</a>
-				</li>
+				<div class="cat">
+						<a href="{% url 'show_category' cat.slug %}"><img src="{{ MEDIA_URL }}cat_pics/{{ cat.photo }}" alt="Picture of {{ cat.photo }}"/></a>
+						<div class="cat_text">{{ cat.name }}</div>
+				</div>
 			{% endif %}
-		{% endfor %} 
-	</ul>
+		{% endfor %}
+	</div>
 	{% else %}
 		<strong>There are no categories present.</strong>
-	{% endif %} 
+	{% endif %}
 </div>
 {% endblock %}

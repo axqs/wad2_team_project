@@ -6,39 +6,48 @@
     <meta charset="utf-8" />
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 	<title>
+		Nbhd Cookbook -
 		{% block title_block %}
-			Neighborhood Cookbook
 		{% endblock %}
     </title>
 	</head>
  	<div class="header">
-		<a class="base" href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="170"/></a>
-		<a class="base" href="{% url 'trending' %}">Trending</a>
-		<a class="base" href="{% url 'categories' %}">Categories</a>
-		{% if user.is_authenticated %}
-			<a class="base" href="{% url 'userprofile' user.username %}">My Account</a>
-			<a class="base" href="{% url 'addrecipe' %}">Add Recipe</a>
-			<a class="base" href="{% url 'logout' %}">Logout</a>
-		{% else %}
-
-			<a class="base" href="{% url 'login' %}">Login</a>
-			<a class="base" href="{% url 'register' %}">Sign Up</a>
-		{% endif %}
+		<div class="logo">
+			<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="170"/></a>
+		</div>
+		<div class="urls">
+			<a href="{% url 'trending' %}">Trending</a>
+			<a href="{% url 'categories' %}">Categories</a>
+			{% if user.is_authenticated %}
+				<a href="{% url 'userprofile' user.username %}">My Account</a>
+				<a href="{% url 'addrecipe' %}">Add Recipe</a>
+				<a href="{% url 'logout' %}">Logout</a>
+			{% else %}
+				<a href="{% url 'login' %}">Login</a>
+				<a href="{% url 'register' %}">Sign Up</a>
+			{% endif %}
+		</div>
 	</div>
 
 	<body>
-    <div>
-      {% block body_block %}
-      {% endblock %}
-    </div>
+		<div class="page_name">
+			{% block name_block %}
+			{% endblock %}
+		</div>
+	    <div class="body">
+	      {% block body_block %}
+	      {% endblock %}
+	    </div>
 	</body>
 
-  <div class="footer">
-    <a class="base" href="{% url 'about' %}">About the Creators</a>
-    <a class="base" href="{% url 'contact' %}">Contact Us</a>
-	<a class="base" href="{% url 'faq' %}">FAQs</a>
-    {% if user.is_authenticated %}
-      <a class="base" href="{% url 'suggestion' %}">Suggest a Category</a>
-    {% endif %}
-  </div>
+	<div class="footer">
+		<div class="urls">
+			<a href="{% url 'about' %}">About Us</a>
+			<a href="{% url 'contact' %}">Contact Us</a>
+			<a href="{% url 'faq' %}">FAQs</a>
+			{% if user.is_authenticated %}
+				<a href="{% url 'suggestion' %}">Suggest a Category</a>
+			{% endif %}
+		</div>
+	</div>
 </html>

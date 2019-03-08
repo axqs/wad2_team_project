@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from datetime import datetime
 # Create your views here.
 
+cats_bar = Category.objects.exclude(name__in=['Cuisines','Special Occasions']).order_by('name')
+
 def index(request):
 	#get all recipes, order alphabetically by name
 	recipes = Recipe.objects.order_by('name')
@@ -35,7 +37,6 @@ def faq(request):
 
 def trending(request):
 	recipes = Category.objects.get(slug="st-patricks-day").recipe_set.all()
-
 	return render(request,'recipes/trending.html', {'recipes':recipes})
 
 def categories(request):
@@ -175,17 +176,18 @@ def userprofile(request, username):
 	return render(request, 'recipes/profile.html', context_dict)
 
 def show_category(request, cat_name_slug):
-    context_dict = {}
+	context_dict = {}
 
-    try:
-        cat = Category.objects.get(slug=cat_name_slug)
-        recipes = cat.recipe_set.all()
-        subcats = Category.objects.filter(supercat=cat)
-        context_dict['recipes'] = recipes
-        context_dict['subcats'] = subcats
-        context_dict['cat'] = cat
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['recipes'] = None
-        
-    return render(request, 'recipes/category.html', context_dict)
+	try:
+		cat = Category.objects.get(slug=cat_name_slug)
+		recipes = cat.recipe_set.all()
+		subcats = Category.objects.filter(supercat=cat)
+		context_dict['recipes'] = recipes
+		context_dict['subcats'] = subcats
+		context_dict['cat'] = cat
+		context_dict['cats_bar'] = cats_bar
+	except Category.DoesNotExist:
+		context_dict['category'] = None
+		context_dict['recipes'] = None
+
+	return render(request, 'recipes/category.html', context_dict)

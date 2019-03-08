@@ -5,8 +5,11 @@
 	Trending
 {% endblock %}
 
+{% block name_block %}
+	Trending
+{% endblock %}
+
 {% block body_block %}
-	<h3>Trending</h3>
 	{% if recipes %}
 	<div class="row">
 		{% for recipe in recipes %}

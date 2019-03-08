@@ -5,9 +5,11 @@
    Adding a recipe
 {% endblock %}
 
-{% block body_block %}
+{% block name_block %}
+	New Recipe
+{% endblock %}
 
-<h2> New Recipe </h2>
+{% block body_block %}
   <form id="addrecipe" method="post" action={% url 'addrecipe' %}>
     {% csrf_token %}
     {% for field in form.visible_fields %}

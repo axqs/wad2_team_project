@@ -9,6 +9,7 @@ h2 {
 
 h3 {
 	color: #8E7262;
+	text-align: center;
 }
 
 a, li, h4{
@@ -29,4 +30,29 @@ p { color: #09203D; }
 a.base{
 	text-decoration: underline;
 	color: #09203D;
+}
+
+div.cat img{
+	width: 100%;
+}
+
+div.cat_text{
+	padding: 2%;
+	position: relative;
+	background-color: white;
+	text-align: center;
+	bottom: 20px;
+}
+
+div.row {
+	display: grid;
+	grid-template-columns: 27% 27% 27%;
+	grid-gap: 4%;
+	justify-content: center;
+	align-items: center;
+}
+
+div.show_categories {
+	display: grid;
+	grid-template-columns: auto auto;
 }

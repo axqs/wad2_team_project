@@ -1,58 +1,99 @@
 /* to activate, run: python manage.py collectstatic --noinput --clear */
-
-html {
-	background-color: #467DA2;
-}
-h2 {
-	font-family: monospace;
-}
-
-h3 {
-	color: #8E7262;
-}
-
-a, li, h4{
-	color: #3A1003;
-	text-decoration: underline;
-}
-a:hover{
-	color: white;
-	text-decoration: overline;
-}
-
-a.name, span {
+/* website colors: light bule - 467DA2, dark blue - 09203D,
+				   light brown - 8E7262, medium brown - 773D1B,
+				   dark brown - 3A1003
+*/
+/* GENERIC */
+a {
 	color: #773D1B;
+	text-decoration: none;
+}
+a:hover, a:active {
+	color: #8E7262;
+	cursor: pointer;
+}
+img.profile {
+	min-width: 4.3em;
+	max-width: 30em;
 }
 
-p { color: #09203D; }
-
-a.base{
-	text-decoration: underline;
-	color: #09203D;
+/* BASE */
+html {
+	background-color: #ccbeaf;
+	font-family: sans-serif;
+	font-size: 1em;
+	color: #3A1003
+}
+div.header {
+	background-color: #09203D;
+	text-align: right;
+	display: grid;
+	grid-template-columns: 10% 85%;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+}
+div.urls a{
+	background-color: #467DA2;
+	padding: 0.89em;
+	color: #ffffff;
+	text-decoration: none;
+}
+div.urls a:hover{
+	background-color: grey;
+}
+div.page_name {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	clear: left;
+	text-align: center;
+	font-size: 3em;
+}
+div.body {
+	padding-bottom: 3%;
+}
+div.footer {
+	background-color: #09203D;
+	padding-top: 1.9em;
+	padding-left: 2%;
+	padding-bottom: 1.9em;
+	padding-right: 2%;
 }
 
-div.cat {
-	width:30%;
-	float: left;
-	padding: 1%;
-}
+/* CATEGORIES PAGES */
 
 div.cat img{
+	min-width: 4.3em;
+	max-width: 20em;
 	width: 100%;
 }
-
 div.cat_text{
 	padding: 2%;
 	position: relative;
 	background-color: white;
 	text-align: center;
-	bottom: 20px;
+	bottom: 1em;
+	font-size: 1em;
+}
+div.row {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: 4%;
+	justify-content: center;
+	align-items: center;
+}
+div.show_categories {
+	font-family: sans-serif;
+	display: grid;
+	grid-template-columns: 9em auto;
+	grid-gap: 1%;
+}
+div.cat_bar a{
+	margin-left: 0.9em;
+	font-size: 1em;
 }
 
-div.row::after {
-	position: relative;
-	align-items: center;
-	content: "";
-	clear: both;
-	display: table;
+div.cat_bar h3{
+	line-height: 10%;
+	font-weight: bold;
 }
