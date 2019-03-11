@@ -6,10 +6,11 @@
 {% endblock %}
 
 {% block name_block %}
-	Login
+	Welcome to the Neighborhood Cook Book!
 {% endblock %}
 
 {% block body_block %}
+    <h2> Please sign in below </h2>
     <form id="login_form" method="post" action={% url 'login' %}>
         {% csrf_token %}
 		Username: <input type="text" name="username" value="" size="50" />

@@ -14,14 +14,14 @@
 
 {% block body_block %}
 	{% if recipe %}
-		Chef: <a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a> -- {{ recipe.date_posted }}<br>
-		Cook time: {{ recipe.cook_time }} min<br>
+		<strong> Chef: </strong> <a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a> -- {{ recipe.date_posted }}<br>
+		<strong> Cook time:</strong>  {{ recipe.cook_time }} min<br>
 		<img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.name }}" width="30%"/>
 	{% else %}
 		<strong>This is not a recipe.</strong>
 	{% endif %}
 
-
+    <div class="reviews">
 	<h3>Reviews</h3>
 	{% if reviews %}
 		<ul>
@@ -38,6 +38,7 @@
 	{% else %}
 		<strong>There are no reviews left for this recipe.</strong>
 	{% endif %}
+    </div>
 
 
 	{% if user.is_authenticated %}

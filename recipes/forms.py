@@ -64,7 +64,7 @@ class AddRecipeForm(forms.ModelForm):
     )
     name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name", required=True)
     photo = forms.ImageField()
-    cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minuets", required=True)
+    cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minutes", required=True)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True)
 
