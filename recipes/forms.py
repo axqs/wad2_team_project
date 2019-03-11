@@ -7,7 +7,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username','email','password','first_name','last_name')
+        fields = ('username','email','first_name','last_name','password')
 
 # our version of UserProfile
 class ChefForm(forms.ModelForm):
@@ -65,6 +65,9 @@ class AddRecipeForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name", required=True)
     photo = forms.ImageField()
     cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minutes", required=True)
+    description = forms.CharField(widget=forms.Textarea(), label="Description", required=True)
+    ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredient requirements", required=True)
+    method = forms.CharField(widget=forms.Textarea(), label="Cooking method", required=True)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True)
 
