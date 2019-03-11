@@ -11,6 +11,7 @@
 	{% endif %}
 {% endblock %}
 
+
 {% block body_block %}
 	{% if recipe %}
 		Chef: <a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a> -- {{ recipe.date_posted }}<br>
@@ -19,6 +20,7 @@
 	{% else %}
 		<strong>This is not a recipe.</strong>
 	{% endif %}
+
 
 	<h3>Reviews</h3>
 	{% if reviews %}

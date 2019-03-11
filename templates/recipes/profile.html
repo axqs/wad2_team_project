@@ -10,10 +10,14 @@
 {% endblock %}
 
 {% block body_block %}
-	<img class="profile" src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}" width="30%"/><br>
-	Username: {{ chef.user.username }}<br>
-	Full name: {{ chef.user.get_full_name }}<br>
-	Date joined: {{ chef.user.date_joined }}<br>
+	<img class="profile" src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}" width="20%" align="left"/> <br>
+
+    <div class ="my_account">
+	 <strong>Username :</strong>   {{ chef.user.username }}<br>
+	 <strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
+     <strong> Date joined :</strong> {{ chef.user.date_joined }}<br>
+    </div>
+
 	<h3>Recipes</h3>
 	{% if recipes %}
 		{% for recipe in recipes %}
