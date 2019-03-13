@@ -39,7 +39,13 @@
 			<h3>Reviews</h3>
 			{% if reviews %}
 				{% for review in reviews %}
-					<a href="{% url 'viewrecipe' review.recipe.slug %}">{{ review.recipe }}</a> -- {{ review.title }}<br>
+					<div class="recipe">
+						<a href="{% url 'viewrecipe' review.recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/></a>
+						<div>
+							<strong>{{ review.rating }}, {{ review.title }}</strong> -- {{ review.date_posted }}<br/>
+							{{ review.comment }}
+						</div>
+					</div>
 				{% endfor %}
 			{% else %}
 				<strong>User has not given any reviews.</strong>

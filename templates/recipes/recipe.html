@@ -21,7 +21,7 @@
 					<strong> Chef: </strong><a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a><br/>
 					<strong> Date: </strong>{{ recipe.date_posted }}<br/>
 					<strong> Cook time:</strong>  {{ recipe.cook_time }} min<br/>
-					<strong> Ingredients:</strong><br/>
+					<strong> Ingredients:</strong>
 					<pre>{{ recipe.ingredients }}</pre>
 				{% endif %}
 			</div>
