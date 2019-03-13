@@ -1,5 +1,5 @@
 
-    
+
 /* to activate, run: python manage.py collectstatic --noinput --clear */
 /* website colors: light bule - 467DA2, dark blue - 09203D,
 				   light brown - 8E7262, medium brown - 773D1B,
@@ -56,6 +56,7 @@ div.body {
 	padding-bottom: 3%;
 }
 div.footer {
+	clear: both;
 	background-color: #09203D;
 	padding-top: 1.9em;
 	padding-left: 2%;
@@ -98,13 +99,48 @@ div.cat_bar a{
 	margin-left: 0.9em;
 	font-size: 1em;
 }
-
 div.cat_bar h3{
 	line-height: 10%;
 	font-weight: bold;
 }
 
-div.reviews {
-    text-align: right;
+/* RECIPE PAGE */
+
+div.recipe_page{
+	min-width: 10em;
+	padding-left: 1em;
+	padding-right: 1em;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	justify-content: left;
+	grid-column-gap: 0.75em;
+}
+div.recipe_info img{
+	gt
+	width: 100%;
 }
 
+/* HOMEPAGE */
+
+div.index_page {
+	padding-left: 2em;
+	padding-right: 2em;
+	display: grid;
+	grid-template-columns: auto 55% auto;
+	justify-content: center;
+	grid-column-gap: 2em;
+}
+div.index_page img{
+	width: 100%;
+}
+div.index_page img:hover{
+	opacity: 0.7;
+}
+div.latest_posts {
+	text-align: center;
+}
+div.latest_posts img.index-logo{
+	opacity: 1;
+	text-align: center;
+	width: 60%;
+}

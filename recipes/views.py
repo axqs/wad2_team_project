@@ -13,14 +13,13 @@ cats_bar = Category.objects.exclude(name__in=['Cuisines','Special Occasions']).o
 
 def index(request):
 	#get all recipes, order alphabetically by name
-	recipes = Recipe.objects.order_by('name')
+	latest = Recipe.objects.order_by('date_posted')[:6]
 	#get all categories -- no order
-	cats = Category.objects.all()
-	reviews = Review.objects.all()
-	#get all recipes under dinner category
-	dinners = Category.objects.get(name="Dinner").recipe_set.all()
+	cuisines = Category.objects.filter(type="CUS").order_by('likes')[:6]
 
-	context_dict = {'recipes':recipes, 'cats':cats, 'dinners':dinners, "reviews":reviews}
+	top = Recipe.objects.order_by('name')[:6]
+
+	context_dict = {'latest':latest, 'cuisines':cuisines, 'top':top}
 	response = render(request,'recipes/index.html', context=context_dict)
 	return response
 
@@ -137,7 +136,7 @@ def addrecipe(request):
     return render(request, 'recipes/addrecipe.html', {'form':form} )
 
 def viewrecipe(request, recipe_name_slug):
-	context_dict = {}
+	context_dict = {'cats_bar':cats_bar}
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
 		reviews = Review.objects.filter(recipe=recipe)
