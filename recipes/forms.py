@@ -65,25 +65,12 @@ class AddRecipeForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name", required=True)
     photo = forms.ImageField()
     cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minutes", required=True)
-    description = forms.CharField(widget=forms.Textarea(), label="Description", required=True)
-    ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredient requirements", required=True)
-    method = forms.CharField(widget=forms.Textarea(), label="Cooking method", required=True)
+    about = forms.CharField(widget=forms.Textarea(), label="Description", required=True)
+    ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredients", required=True)
+    steps = forms.CharField(widget=forms.Textarea(), label="Steps", required=True)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True)
+    categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True, help_text="Up to three")
 
     class Meta:
         model = Recipe
         fields = ('name','photo','cook_time','categories')
-
-
-
-"""
-top
-<!-- <a href="{% url 'trending' %}">Trending</a>
-<a href="{% url 'categories' %}">Categories</a>
-<a href="{% url 'myaccount' %}">My Account</a>
--->
-
-bottom
-<a href="{% url 'faqs' %}">FAQs</a>
-"""

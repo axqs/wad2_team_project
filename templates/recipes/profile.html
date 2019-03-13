@@ -10,29 +10,40 @@
 {% endblock %}
 
 {% block body_block %}
-	<img class="profile" src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}" width="20%" align="left"/> <br>
+	<div class="account">
+		<div class ="user_info">
+			<img class="profile" src="{{ MEDIA_URL }}profile_pics/{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}"/><br/>
+			<strong>Username :</strong>   {{ chef.user.username }}<br>
+			<strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
+			<strong> Date joined :</strong> {{ chef.user.date_joined }}
+		</div>
 
-    <div class ="my_account">
-	 <strong>Username :</strong>   {{ chef.user.username }}<br>
-	 <strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
-     <strong> Date joined :</strong> {{ chef.user.date_joined }}<br>
-    </div>
+		<div class="user_recipes">
+			<h3>Bio</h3>
+				{{ chef.bio }}
+			<h3>Recipes</h3>
+			{% if recipes %}
+				{% for recipe in recipes %}
+					<div class="recipe">
+						<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}" height="60"/></a>
+						<div>
+							<strong>{{ recipe.name }}</strong><br/>
+							{{ recipe.about }}
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<strong>User has not created any recipes.</strong>
+			{% endif %}
 
-	<h3>Recipes</h3>
-	{% if recipes %}
-		{% for recipe in recipes %}
-			<a href="{% url 'viewrecipe' recipe.slug %}">{{ recipe.name }}</a><br>
-		{% endfor %}
-	{% else %}
-		<strong>User has not created any recipes.</strong>
-	{% endif %}
-
-	<h3>Reviews</h3>
-	{% if reviews %}
-		{% for review in reviews %}
-			<a href="{% url 'viewrecipe' review.recipe.slug %}">{{ review.recipe }}</a> -- {{ review.title }}<br>
-		{% endfor %}
-	{% else %}
-		<strong>User has not given any reviews.</strong>
-	{% endif %}
+			<h3>Reviews</h3>
+			{% if reviews %}
+				{% for review in reviews %}
+					<a href="{% url 'viewrecipe' review.recipe.slug %}">{{ review.recipe }}</a> -- {{ review.title }}<br>
+				{% endfor %}
+			{% else %}
+				<strong>User has not given any reviews.</strong>
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}

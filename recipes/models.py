@@ -31,6 +31,7 @@ class Category(models.Model):
 class Chef(models.Model):
 	user = models.OneToOneField(User)
 	photo = models.ImageField(upload_to='profile_pics', default='anon.png')
+	bio = models.TextField(default="Hello! I enjoy making food the opportunity to upload recipes, share tips, and explore recipes on this website!")
 
 	def __str__(self):
 		return self.user.username
@@ -43,7 +44,10 @@ class Recipe(models.Model):
 	photo = models.ImageField(upload_to='food_pics', blank=True)
 	cook_time = models.IntegerField(default=0)
 	date_posted = models.DateTimeField(default=timezone.now)
-	#ingredients, steps, overall rating
+	ingredients = models.TextField(default="")
+	steps = models.TextField(default="")
+	about = models.TextField(default="Check out my new recipe!")
+	#overall rating
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.chef.username+"-"+self.name)
@@ -62,10 +66,10 @@ class Review(models.Model):
 
 class Suggestion(models.Model):
 	author = models.ForeignKey(User)
-	comment = models.TextField(default=" I love this website!")
+	comment = models.TextField(default="I love this website!")
 
 class Contact(models.Model):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField(unique=True)
-	comment = models.TextField(default=" I love this website!")
+	comment = models.TextField(default="I love this website!")

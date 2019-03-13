@@ -14,11 +14,11 @@
     {% csrf_token %}
     {% for field in form.visible_fields %}
 		{{ field.errors }}
-		{{ field.label }}<br>
+		<strong>{{ field.label }}</strong>
 		{% if field.help_text %}
-			<p class="help">{{ field.help_text }}</p>
-		{% endif %}
-		{{ field }}<br>
+			{{ field.help_text }}
+		{% endif %}<br/>
+		{{ field }}<br/>
 	{% endfor %}
   <input type="submit" name="submit" value="Add Recipe" />
 	</form>

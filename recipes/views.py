@@ -13,9 +13,9 @@ cats_bar = Category.objects.exclude(name__in=['Cuisines','Special Occasions']).o
 
 def index(request):
 	#get all recipes, order alphabetically by name
-	latest = Recipe.objects.order_by('date_posted')[:6]
+	latest = Recipe.objects.order_by('-date_posted')[:6]
 	#get all categories -- no order
-	cuisines = Category.objects.filter(type="CUS").order_by('likes')[:6]
+	cuisines = Category.objects.filter(type="CUS").order_by('-likes')[:6]
 
 	top = Recipe.objects.order_by('name')[:6]
 
@@ -69,71 +69,74 @@ def register(request):
 	return render(request, 'recipes/register.html',{'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-        print(user)
+		user = authenticate(username=username, password=password)
+		print(user)
 
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse('index'))
-            else:
-                return HttpResponse("Your Rango account is disabled.")
-        else:
-            print("Invalid ligin details: {0},{1}".format(username, password))
-            return HttpResponseRedirect(reverse('index'))
-    else:
-        return render(request, 'recipes/login.html', {})
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+			else:
+				return HttpResponse("Your Rango account is disabled.")
+		else:
+			print("Invalid ligin details: {0},{1}".format(username, password))
+		return HttpResponseRedirect(reverse('index'))
+	else:
+		return render(request, 'recipes/login.html', {})
 
 @login_required
 def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('index'))
+	logout(request)
+	return HttpResponseRedirect(reverse('index'))
 
 @login_required
 def suggestion(request):
-    form = SuggestForm()
-    if request.method == 'POST':
-        form = SuggestForm(data=request.POST)
-        if form.is_valid():
-            suggestion = form.save(commit=False)
-            suggestion.author = request.user
-            suggestion.save()
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            print(form.errors)
-    return render(request, 'recipes/suggestion.html', {'form':form})
+	form = SuggestForm()
+	if request.method == 'POST':
+		form = SuggestForm(data=request.POST)
+		if form.is_valid():
+			suggestion = form.save(commit=False)
+			suggestion.author = request.user
+			suggestion.save()
+			return HttpResponseRedirect(reverse('index'))
+	else:
+		print(form.errors)
+	return render(request, 'recipes/suggestion.html', {'form':form})
 
 def contact(request):
-    form = ContactForm()
-    if request.method == 'POST':
-        form = ContactForm(data=request.POST)
-        if form.is_valid():
-            suggestion = form.save(commit=True)
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            print(form.errors)
-    return render(request, 'recipes/contact.html', {'form':form})
+	form = ContactForm()
+	if request.method == 'POST':
+		form = ContactForm(data=request.POST)
+		if form.is_valid():
+			suggestion = form.save(commit=True)
+			return HttpResponseRedirect(reverse('index'))
+		else:
+			print(form.errors)
+			return render(request, 'recipes/contact.html', {'form':form})
 
 def addrecipe(request):
-    form = AddRecipeForm()
-    if request.method == 'POST':
-        form = AddRecipeForm(data=request.POST)
-        if form.is_valid():
-            recipe = form.save(commit=False)
-            recipe.chef = request.user.username
-            cats = form.cleaned_data.get('categories')
-            for cat in cats:
-                category = Category.objects.get(id=cat)
-                recipes.categories.add(category)
-            recipe.save()
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            print(form.errors)
-    return render(request, 'recipes/addrecipe.html', {'form':form} )
+	form = AddRecipeForm()
+	if request.method == 'POST':
+		form = AddRecipeForm(data=request.POST)
+		if form.is_valid():
+			recipe = form.save(commit=False)
+			recipe.chef = request.user.username
+			cats = form.cleaned_data.get('categories')
+			if(len(cats) > 3):
+				raise forms.ValidationError("You can't select more than 3 items.")
+			else:
+				for cat in cats:
+					category = Category.objects.get(id=cat)
+					recipes.categories.add(category)
+			recipe.save()
+			return HttpResponseRedirect(reverse('index'))
+		else:
+			print(form.errors)
+	return render(request, 'recipes/addrecipe.html', {'form':form} )
 
 def viewrecipe(request, recipe_name_slug):
 	context_dict = {'cats_bar':cats_bar}

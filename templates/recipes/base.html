@@ -13,7 +13,7 @@
 	</head>
  	<div class="header">
 		<div class="logo">
-			<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="170"/></a>
+			<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="150"/></a>
 		</div>
 		<div class="urls">
 			<a href="{% url 'trending' %}">Trending</a>
@@ -30,13 +30,15 @@
 	</div>
 
 	<body>
-		<div class="page_name">
-			{% block name_block %}
-			{% endblock %}
-		</div>
-		<div class="body">
-			{% block body_block %}
-			{% endblock %}
+		<div class="main">
+			<div class="page_name">
+				{% block name_block %}
+				{% endblock %}
+			</div>
+			<div class="body">
+				{% block body_block %}
+				{% endblock %}
+			</div>
 		</div>
 	</body>
 

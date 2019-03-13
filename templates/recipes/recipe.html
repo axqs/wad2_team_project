@@ -21,6 +21,8 @@
 					<strong> Chef: </strong><a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a><br/>
 					<strong> Date: </strong>{{ recipe.date_posted }}<br/>
 					<strong> Cook time:</strong>  {{ recipe.cook_time }} min<br/>
+					<strong> Ingredients:</strong><br/>
+					<pre>{{ recipe.ingredients }}</pre>
 				{% endif %}
 			</div>
 			<div class="cat_bar">
@@ -33,7 +35,13 @@
 
 		<div class="recipe_info">
 			{% if recipe %}
-				<img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.name }}"/>
+				<img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.name }}"/><br/>
+				<div class="steps">
+					{{ recipe.about }}<br/>
+					<br/>
+					Steps:<br/>
+					<pre>{{ recipe.steps }}</pre>
+				</div>
 			{% else %}
 				<strong>This is not a recipe.</strong>
 			{% endif %}
