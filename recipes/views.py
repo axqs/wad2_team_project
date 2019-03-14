@@ -144,9 +144,8 @@ def viewrecipe(request, recipe_name_slug):
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
 		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
-		length = len(reviews)
-		avgRating = (Review.objects.aggregate(Sum('rating'))/length)
-		context_dict['avgRating'] = avgRating
+		avgRating = Review.objects.filter(recipe=recipe).aggregate(Sum('rating'))["rating__sum"] / len(reviews)
+		context_dict['avgRating'] = round(avgRating,2)
 		context_dict['recipe'] = recipe
 		context_dict['reviews'] = reviews
 	except:

@@ -50,10 +50,11 @@
 
 		<div class="reviews">
 			<h3>Reviews</h3>
+			<div class="view">
 			{% if reviews %}
 				{% for review in reviews %}
 					<div class="recipe">
-						<img src="{{ MEDIA_URL }}food_pics/{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
+						<img src="{{ MEDIA_URL }}profile_pics/{{ review.author.chef.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
 						<div>
 							<strong>{{ review.rating }}, {{ review.author }}</strong> -- {{ review.title }}<br/>
 							{{ review.comment }}
@@ -63,18 +64,20 @@
 			{% else %}
 				<strong>There are no reviews left for this recipe.</strong>
 			{% endif %}
-
+			</div>
 			{% if user.is_authenticated %}
 				<h3>Leave a Review</h3>
-				<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
-					{% csrf_token %}
-					{% for field in form.visible_fields %}
-					{{ field.errors }}
-						{{ field.label }}<br/>
-						{{ field }}<br/>
-					{% endfor %}
-					<input type="submit" name="submit" value="Submit" />
+				<div class="give">
+					<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
+						{% csrf_token %}
+						{% for field in form.visible_fields %}
+						{{ field.errors }}
+							{{ field.label }}<br/>
+							{{ field }}<br/>
+						{% endfor %}
+						<input type="submit" name="submit" value="Submit" />
 				</form>
+				</div>
 			{% endif %}
 		</div>
 	</div>
