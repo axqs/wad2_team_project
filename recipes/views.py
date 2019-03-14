@@ -117,7 +117,7 @@ def contact(request):
 			return HttpResponseRedirect(reverse('index'))
 		else:
 			print(form.errors)
-			return render(request, 'recipes/contact.html', {'form':form})
+	return render(request, 'recipes/contact.html', {'form':form})
 
 def addrecipe(request):
 	form = AddRecipeForm()
