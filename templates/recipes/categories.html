@@ -16,7 +16,7 @@
 		{% for cat in cats %}
 			{% if cat.type == 'CAT'%}
 				<div class="cat">
-						<a href="{% url 'show_category' cat.slug %}"><img src="{{ MEDIA_URL }}cat_pics/{{ cat.photo }}" alt="Picture of {{ cat.photo }}"/></a>
+						<a href="{% url 'show_category' cat.slug %}"><img src="{{ MEDIA_URL }}{{ cat.photo }}" alt="Picture of {{ cat.photo }}"/></a>
 						<div class="cat_text">{{ cat.name }}</div>
 				</div>
 			{% endif %}

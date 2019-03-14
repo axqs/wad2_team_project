@@ -27,7 +27,7 @@
 				<div class="row">
 					{% for subcat in subcats %}
 						<div class="cat">
-								<a href="{% url 'show_category' subcat.slug %}"><img src="{{ MEDIA_URL }}cat_pics/{{ subcat.photo }}" alt="Picture of {{ subcat.photo }}"/></a>
+								<a href="{% url 'show_category' subcat.slug %}"><img src="{{ MEDIA_URL }}{{ subcat.photo }}" alt="Picture of {{ subcat.photo }}"/></a>
 								<div class="cat_text">{{ subcat.name }}</div>
 						</div>
 					{% endfor %}
@@ -37,7 +37,7 @@
 					<div class="row">
 						{% for recipe in recipes %}
 							<div class="cat">
-									<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}"/></a>
+									<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}"/></a>
 									<div class="cat_text">{{ recipe.name }}</div>
 							</div>
 						{% endfor %}

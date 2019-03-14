@@ -17,7 +17,7 @@
 			<h3>Popular Cuisines</h3>
 			{% if cuisines %}
 				{% for cuisine in cuisines %}
-					<a href="{% url 'show_category' cuisine.slug %}"><img src="{{ MEDIA_URL }}cat_pics/{{ cuisine.photo }}" alt="Picture of {{ cuisine.photo }}"/></a>
+					<a href="{% url 'show_category' cuisine.slug %}"><img src="{{ MEDIA_URL }}{{ cuisine.photo }}" alt="Picture of {{ cuisine.photo }}"/></a>
 					<div class="cat_text">{{ cuisine.name }}</div>
 				{% endfor %}
 			{% endif %}
@@ -28,7 +28,7 @@
 			<h2>Latest Posts</h2>
 			{% if latest %}
 				{% for post in latest %}
-					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>
+					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>
 					<div class="cat_text">{{ post.name }}</div>
 				{% endfor %}
 			{% endif %}
@@ -38,7 +38,7 @@
 			<h3>Top Rated Recipes</h3>
 			{% if top %}
 				{% for post in top %}
-					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>
+					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>
 					<div class="cat_text">{{ post.name }}</div>
 				{% endfor %}
 			{% endif %}

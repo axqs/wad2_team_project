@@ -25,7 +25,7 @@
 			{% if recipes %}
 				{% for recipe in recipes %}
 					<div class="recipe">
-						<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}" height="60"/></a>
+						<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}" height="60"/></a>
 						<div>
 							<strong>{{ recipe.name }}</strong><br/>
 							{{ recipe.about }}
@@ -40,7 +40,7 @@
 			{% if reviews %}
 				{% for review in reviews %}
 					<div class="recipe">
-						<a href="{% url 'viewrecipe' review.recipe.slug %}"><img src="{{ MEDIA_URL }}food_pics/{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/></a>
+						<a href="{% url 'viewrecipe' review.recipe.slug %}"><img src="{{ MEDIA_URL }}{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/></a>
 						<div>
 							<strong>{{ review.rating }}, {{ review.title }}</strong> -- {{ review.date_posted }}<br/>
 							{{ review.comment }}

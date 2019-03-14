@@ -145,7 +145,7 @@ def add_recipe(cats_lst, name, cook_time, chef, photo):
 	print("   ",name,cats_lst)
 	for c in cats_lst:
 		r.categories.add(cat_objects[c])
-	r.photo = photo
+	r.photo = "food_pics/"+photo
 	r.save()
 	return r
 
@@ -156,7 +156,7 @@ def add_cat(name, likes, type, supercat, photo):
 	else:
 		c = Category.objects.get_or_create(name=name, type=type)[0]
 	c.likes=likes
-	c.photo = photo
+	c.photo = "cat_pics/"+photo
 	c.save()
 	return c
 
