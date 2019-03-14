@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.db.models import Sum
 # Create your views here.
 
 cats_bar = Category.objects.exclude(name__in=['Cuisines','Special Occasions']).order_by('name')
@@ -143,6 +144,9 @@ def viewrecipe(request, recipe_name_slug):
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
 		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
+		length = len(reviews)
+		avgRating = (Review.objects.aggregate(Sum('rating'))/length)
+		context_dict['avgRating'] = avgRating
 		context_dict['recipe'] = recipe
 		context_dict['reviews'] = reviews
 	except:

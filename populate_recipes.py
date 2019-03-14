@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 cat_objects = {}
 admin_objects = {}
+bio = "Hello! I enjoy making food the opportunity to upload recipes, share tips, and explore recipes on this website!"
 def populate():
 	reviews = {"Best pancakes" : {"author" : "lynda_faller", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
 	}
@@ -174,6 +175,7 @@ def add_user(username, user_data):
 def add_chef(user,user_data):
 	chef = Chef.objects.get_or_create(user=user)[0]
 	chef.photo = user_data["photo"]
+	chef.bio = bio
 	chef.save()
 	return chef
 

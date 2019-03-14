@@ -20,7 +20,8 @@
 				{% if recipe %}
 					<strong> Chef: </strong><a class="name" href="{% url 'userprofile' recipe.chef.username %}">{{ recipe.chef }}</a><br/>
 					<strong> Date: </strong>{{ recipe.date_posted }}<br/>
-					<strong> Cook time:</strong>  {{ recipe.cook_time }} min<br/>
+					<strong> Overall Rating: </strong>{{ avgRating }}<br/>
+					<strong> Cook time: </strong>{{ recipe.cook_time }} min<br/>
 					<strong> Ingredients:</strong>
 					<pre>{{ recipe.ingredients }}</pre>
 				{% endif %}
@@ -54,7 +55,7 @@
 					<div class="recipe">
 						<img src="{{ MEDIA_URL }}food_pics/{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
 						<div>
-							<strong>{{ review.rating }}, {{ review.title }}</strong> -- {{ review.date_posted }}<br/>
+							<strong>{{ review.rating }}, {{ review.author }}</strong> -- {{ review.title }}<br/>
 							{{ review.comment }}
 						</div>
 					</div>
@@ -64,7 +65,7 @@
 			{% endif %}
 
 			{% if user.is_authenticated %}
-				<h2>Leave a Review</h2>
+				<h3>Leave a Review</h3>
 				<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
 					{% csrf_token %}
 					{% for field in form.visible_fields %}
