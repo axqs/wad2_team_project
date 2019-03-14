@@ -54,7 +54,7 @@
 			{% if reviews %}
 				{% for review in reviews %}
 					<div class="recipe">
-						<img src="{{ MEDIA_URL }}profile_pics/{{ review.author.chef.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
+						<img src="{{ MEDIA_URL }}{{ review.author.chef.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
 						<div>
 							<strong>{{ review.rating }}, {{ review.author }}</strong> -- {{ review.title }}<br/>
 							{{ review.comment }}
