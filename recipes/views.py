@@ -141,10 +141,11 @@ def addrecipe(request):
 
 def viewrecipe(request, recipe_name_slug):
 	context_dict = {'cats_bar':cats_bar}
+
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
 		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
-		avgRating = Review.objects.filter(recipe=recipe).aggregate(Sum('rating'))["rating__sum"] / len(reviews)
+		avgRating = (Review.objects.filter(recipe=recipe).aggregate(Sum('rating'))["rating__sum"])/len(reviews)
 		context_dict['avgRating'] = round(avgRating,2)
 		context_dict['recipe'] = recipe
 		context_dict['reviews'] = reviews
@@ -162,7 +163,6 @@ def viewrecipe(request, recipe_name_slug):
 	else:
 		print(form.errors)
 	context_dict["form"] = form
-
 	return render(request, 'recipes/recipe.html', context_dict)
 
 def userprofile(request, username):
