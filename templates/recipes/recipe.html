@@ -51,12 +51,13 @@
 			<h3>Reviews</h3>
 			{% if reviews %}
 				{% for review in reviews %}
-					{{ review.title }} -- {{ review.rating }}<br/>
-					{% if review.comment %}
-						{{ review.comment }}<br/>
-					{% endif %}
-					{{ review.author }}, {{ review.date_posted }}
-					<br/>
+					<div class="recipe">
+						<img src="{{ MEDIA_URL }}food_pics/{{ review.recipe.photo }}" alt="Picture of {{ review.recipe }}" height="60"/>
+						<div>
+							<strong>{{ review.rating }}, {{ review.title }}</strong> -- {{ review.date_posted }}<br/>
+							{{ review.comment }}
+						</div>
+					</div>
 				{% endfor %}
 			{% else %}
 				<strong>There are no reviews left for this recipe.</strong>

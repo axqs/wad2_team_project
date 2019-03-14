@@ -142,7 +142,7 @@ def viewrecipe(request, recipe_name_slug):
 	context_dict = {'cats_bar':cats_bar}
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
-		reviews = Review.objects.filter(recipe=recipe)
+		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
 		context_dict['recipe'] = recipe
 		context_dict['reviews'] = reviews
 	except:

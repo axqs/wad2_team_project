@@ -204,7 +204,8 @@ div.recipe {
 	margin-bottom: 8px;
 	height: 60px;
 	background-color: white;
-	overflow: hidden;
+	overflow: scroll;
+	font-size: 0.9em;
 }
 div.recipe img{
 	padding-right: 0.25em;
