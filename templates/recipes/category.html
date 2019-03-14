@@ -37,8 +37,8 @@
 					<div class="row">
 						{% for recipe in recipes %}
 							<div class="cat">
-									<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}"/></a>
-									<div class="cat_text">{{ recipe.name }}</div>
+								<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}"/></a>
+								<div class="cat_text">{{ recipe.name }}</div>
 							</div>
 						{% endfor %}
 					</div>
@@ -47,7 +47,7 @@
 				{% endif %}
 			{% endif %}
 		{% else %}
-			The specified category does not exist!
+			<strong>The specified category does not exist!</strong>
 		{% endif %}
 	</div>
 </div>

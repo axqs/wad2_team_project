@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name='about'),
 	url(r'^faq/$', views.faq, name='faq'),
+	url(r'^recipe/(?P<recipe_name_slug>[\w\-]+)/$', views.viewrecipe, name='viewrecipe'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
@@ -15,5 +16,5 @@ urlpatterns = [
     url(r'^categories/(?P<cat_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
     url(r'^addrecipe/$', views.addrecipe, name='addrecipe'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.userprofile, name='userprofile'),
-	url(r'^(?P<recipe_name_slug>[\w\-]+)/$', views.viewrecipe, name='viewrecipe'),
+
 ]

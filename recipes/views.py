@@ -137,32 +137,37 @@ def addrecipe(request):
 			return HttpResponseRedirect(reverse('index'))
 		else:
 			print(form.errors)
-	return render(request, 'recipes/addrecipe.html', {'form':form} )
+	return render(request, 'recipes/addrecipe.html', {'form':form})
 
 def viewrecipe(request, recipe_name_slug):
 	context_dict = {'cats_bar':cats_bar}
-
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
+		print(recipe.slug,recipe.chef,recipe.cook_time)
 		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
-		avgRating = (Review.objects.filter(recipe=recipe).aggregate(Sum('rating'))["rating__sum"])/len(reviews)
-		context_dict['avgRating'] = round(avgRating,2)
+
+		if len(reviews) > 0:
+			avgRating = (Review.objects.filter(recipe=recipe).aggregate(Sum('rating'))["rating__sum"])/len(reviews)
+			context_dict['avgRating'] = round(avgRating,2)
+		else:
+			context_dict['avgRating'] = "No rating yet."
 		context_dict['recipe'] = recipe
 		context_dict['reviews'] = reviews
 	except:
 		context_dict['recipe'] = None
 
-	form = ReviewForm()
-	if request.method == 'POST':
-		form = ReviewForm(request.POST)
-		if form.is_valid():
-			review = form.save(commit=False)
-			review.recipe = recipe
-			review.author = request.user
-			review.save()
-	else:
-		print(form.errors)
-	context_dict["form"] = form
+	if request.user.is_authenticated():
+		form = ReviewForm()
+		if request.method == 'POST':
+			form = ReviewForm(request.POST)
+			if form.is_valid():
+				review = form.save(commit=False)
+				review.recipe = recipe
+				review.author = request.user
+				review.save()
+		else:
+			print(form.errors)
+		context_dict["form"] = form
 	return render(request, 'recipes/recipe.html', context_dict)
 
 def userprofile(request, username):
