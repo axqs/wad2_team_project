@@ -12,10 +12,10 @@ def populate():
 	reviews = {"Best pancakes" : {"author" : "lynda_faller", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
 	}
 	admins = {
-		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True, "photo":"profile_pics/anon.png",},
-		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True, "photo":"profile_pics/anon.png",},
-		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True, "photo":"profile_pics/anon.png",},
-		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True, "photo":"profile_pics/anon.png",},}
+		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True, "photo":"profile_pics/lynda.png",},
+		"amy_hynes" : {"email":"amy@gmail.com", "password":"amyhynes", "fname":"Amy", "lname":"Hynes", "chef":True, "photo":"profile_pics/amy.png",},
+		"eve_ohagan" : {"email":"eve@gmail.com", "password":"eveohagan", "fname":"Eve", "lname":"O'Hagan", "chef":True, "photo":"profile_pics/eve.png",},
+		"q_smart" : {"email":"q@gmail.com", "password":"qiufeismart", "fname":"Q", "lname":"Smart", "chef":True, "photo":"profile_pics/q.png",},}
 	recipes = [
 		{"name": "Pancakes",
 		"cook_time" : 15,
