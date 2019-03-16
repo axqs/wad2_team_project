@@ -9,7 +9,7 @@ cat_objects = {}
 admin_objects = {}
 bio = "Hello! I enjoy making food the opportunity to upload recipes, share tips, and explore recipes on this website!"
 def populate():
-	reviews = {"Best pancakes" : {"author" : "lynda_faller", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
+	reviews = {"Best pancakes" : {"author" : "q_smart", "recipe" : "Pancakes", "chef" : "lynda_faller", "rating" : 4.25}
 	}
 	admins = {
 		"lynda_faller" : {"email":"lynda@gmail.com", "password":"lyndafaller", "fname":"Lynda", "lname":"Faller", "chef":True, "photo":"profile_pics/lynda.png",},

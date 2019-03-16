@@ -143,7 +143,6 @@ def viewrecipe(request, recipe_name_slug):
 	context_dict = {'cats_bar':cats_bar}
 	try:
 		recipe = Recipe.objects.get(slug=recipe_name_slug)
-		print(recipe.slug,recipe.chef,recipe.cook_time)
 		reviews = Review.objects.filter(recipe=recipe).order_by("-date_posted")
 
 		if len(reviews) > 0:
@@ -165,6 +164,7 @@ def viewrecipe(request, recipe_name_slug):
 				review.recipe = recipe
 				review.author = request.user
 				review.save()
+				return render(request, 'recipes/recipe.html', context_dict)
 		else:
 			print(form.errors)
 		context_dict["form"] = form
