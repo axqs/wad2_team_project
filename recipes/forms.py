@@ -1,6 +1,7 @@
 from django import forms
 from recipes.models import *
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -74,3 +75,20 @@ class AddRecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('name','photo','cook_time','categories')
+        
+class EditProfileForm(UserChangeForm):
+    #exclude certain elements of the big form
+    class Meta:
+        model = User
+        #include
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'password'
+            )
+        
+        #exclude
+ #       exclude= ()
+    
+    

@@ -1,0 +1,17 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+
+
+{% block body_block %}
+
+    <div class="container">
+        <h1>Edit My Profile</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+    </div>
+{% endblock %}

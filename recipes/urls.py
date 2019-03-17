@@ -16,5 +16,9 @@ urlpatterns = [
     url(r'^categories/(?P<cat_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
     url(r'^addrecipe/$', views.addrecipe, name='addrecipe'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.userprofile, name='userprofile'),
-
+#new down here
+    #editprofile
+    url(r'^profile/(?P<username>[\w\-]+)/edit/$', views.edit_profile, name='edit_profile'),
+    #change password
+    url(r'^profile/(?P<username>[\w\-]+)/password/$', views.change_password, name='change_password'),
 ]

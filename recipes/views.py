@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from recipes.models import *
 from recipes.forms import *
@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.db.models import Sum
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 cats_bar = Category.objects.exclude(name__in=['Cuisines','Special Occasions']).order_by('name')
@@ -185,6 +187,38 @@ def userprofile(request, username):
 
 	return render(request, 'recipes/profile.html', context_dict)
 
+@login_required
+def edit_profile(request, username):
+        if request.method== 'POST':
+                #change to be our specific form which inherits from
+                #userchangeform anyway, so don't change anything except
+                #form name 
+                form = EditProfileForm(request.POST, instance=request.user)
+                if form.is_valid():
+                        form.save()
+                        #return redirect('/recipes/profile')
+                        return HttpResponseRedirect(reverse('index'))
+        else:
+                form=EditProfileForm(instance=request.user)
+                args = {'form':form}
+                return render(request, 'recipes/edit_profile.html', args)
+@login_required               
+def change_password(request, username):
+        if request.method=='POST':
+                form  = PasswordChangeForm(data = request.POST, user=request.user)
+                if form.is_valid():
+                        form.save()
+                        update_session_auth_hash(request, form.user)
+                        #return redirect('/recipes/profile')
+                        #return HttpResponseRedirect(reverse('index'))
+                        return redirect('index')
+                else:
+                        return redirect('/recipes/profile/'+username+'/password')
+        else:
+                form=PasswordChangeForm(data = request.POST, user=request.user)
+                args = {'form':form}
+                return render(request, 'recipes/change_password.html', args)
+        
 def show_category(request, cat_name_slug):
 	context_dict = {}
 
