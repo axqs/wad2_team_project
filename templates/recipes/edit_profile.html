@@ -7,7 +7,6 @@
 
     <div class="container">
         <h1>Edit My Profile</h1>
-        <br>
 
         <form method="post">
             {% csrf_token %}
@@ -20,6 +19,7 @@
         <div class="urls">
             {% if user.is_authenticated %}
                 <a href="{% url 'edit_bio' user.username %}">Edit Bio</a>
+                <a href="{% url 'change_password' user.username %}">Change Password</a>
             {% endif %}
             <br>
         </div>
