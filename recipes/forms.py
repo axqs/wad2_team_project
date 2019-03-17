@@ -90,5 +90,14 @@ class EditProfileForm(UserChangeForm):
         
         #exclude
  #       exclude= ()
-    
-    
+class EditBioForm(UserChangeForm):
+    #exclude certain elements of the big form
+    class Meta:
+        model = Chef
+        #include
+        fields = (
+            'bio',
+            )
+        
+        #exclude
+ #       exclude= ()

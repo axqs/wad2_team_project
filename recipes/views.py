@@ -218,6 +218,22 @@ def change_password(request, username):
                 form=PasswordChangeForm(data = request.POST, user=request.user)
                 args = {'form':form}
                 return render(request, 'recipes/change_password.html', args)
+@login_required               
+def change_bio(request, username):
+        if request.method=='POST':
+                form  = UserChangeForm(data = request.POST, instance=request.user)
+                if form.is_valid():
+                        form.save()
+                        update_session_auth_hash(request, form.user)
+                        #return redirect('/recipes/profile')
+                        #return HttpResponseRedirect(reverse('index'))
+                        return redirect('index')
+                else:
+                        return redirect('/recipes/profile/'+username+'/edit_bio')
+        else:
+                form=UserChangeForm(data = request.POST, instance=request.user)
+                args = {'form':form}
+                return render(request, 'recipes/edit_bio.html', args)
         
 def show_category(request, cat_name_slug):
 	context_dict = {}

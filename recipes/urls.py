@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w\-]+)/edit/$', views.edit_profile, name='edit_profile'),
     #change password
     url(r'^profile/(?P<username>[\w\-]+)/password/$', views.change_password, name='change_password'),
+    #change bio
+    url(r'^profile/(?P<username>[\w\-]+)/edit_bio/$', views.change_bio, name='edit_bio'),
 ]

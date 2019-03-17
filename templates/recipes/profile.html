@@ -17,7 +17,9 @@
 				    <a href="{% url 'edit_profile' user.username %}">Edit Profile</a>
 			     {% endif %}
             <br>
+                
             </div>
+            <br>
 			<img class="profile" src="{{ MEDIA_URL }}{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}"/><br/>
 			<strong>Username :</strong>   {{ chef.user.username }}<br>
 			<strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
