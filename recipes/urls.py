@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^recipe/(?P<recipe_name_slug>[\w\-]+)/$', views.viewrecipe, name='viewrecipe'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
+	url(r'^invalidlogin/$', views.invalidlogin, name='invalidlogin'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^suggestion/$', views.suggestion, name='suggestion'),
     url(r'^contact/$', views.contact, name='contact'),
@@ -21,6 +22,4 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w\-]+)/edit/$', views.edit_profile, name='edit_profile'),
     #change password
     url(r'^profile/(?P<username>[\w\-]+)/password/$', views.change_password, name='change_password'),
-    #change bio
-    url(r'^profile/(?P<username>[\w\-]+)/edit_bio/$', views.change_bio, name='edit_bio'),
 ]

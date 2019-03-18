@@ -1,11 +1,10 @@
 
-
-/* to activate, run: python manage.py collectstatic --noinput --clear */
 /* website colors: light bule - 467DA2, dark blue - 09203D,
 				   light brown - 8E7262, medium brown - 773D1B,
 				   dark brown - 3A1003
 */
 /* GENERIC */
+
 a {
 	color: #773D1B;
 	text-decoration: none;
@@ -28,6 +27,7 @@ div.main{
 }
 
 /* BASE */
+
 html {
 	background-color: #ccbeaf;
 	font-family: sans-serif;

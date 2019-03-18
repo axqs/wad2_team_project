@@ -87,9 +87,12 @@ def user_login(request):
 				return HttpResponse("Your Rango account is disabled.")
 		else:
 			print("Invalid ligin details: {0},{1}".format(username, password))
-		return HttpResponseRedirect(reverse('index'))
+			return HttpResponseRedirect(reverse('invalidlogin'))
 	else:
 		return render(request, 'recipes/login.html', {})
+
+def invalidlogin(request):
+	return render(request,'recipes/invalidlogin.html', {})
 
 @login_required
 def user_logout(request):
@@ -166,7 +169,7 @@ def viewrecipe(request, recipe_name_slug):
 				review.recipe = recipe
 				review.author = request.user
 				review.save()
-				return render(request, 'recipes/recipe.html', context_dict)
+				return redirect('/recipes/recipe/'+recipe_name_slug)
 		else:
 			print(form.errors)
 		context_dict["form"] = form
@@ -189,52 +192,39 @@ def userprofile(request, username):
 
 @login_required
 def edit_profile(request, username):
-        if request.method== 'POST':
-                #change to be our specific form which inherits from
-                #userchangeform anyway, so don't change anything except
-                #form name 
-                form = EditProfileForm(request.POST, instance=request.user)
-                if form.is_valid():
-                        form.save()
-                        #return redirect('/recipes/profile')
-                        return HttpResponseRedirect(reverse('index'))
-        else:
-                form=EditProfileForm(instance=request.user)
-                args = {'form':form}
-                return render(request, 'recipes/edit_profile.html', args)
-@login_required               
+
+	edit = EditProfileForm(instance=request.user)
+	bio = EditBioForm(instance=request.user.chef)
+	context_dict = {'edit':edit,'bio':bio}
+
+	if request.method == 'POST':
+		edit = EditProfileForm(request.POST, instance=request.user)
+		bio  = EditBioForm(request.POST, instance=request.user.chef)
+		if edit.is_valid() and bio.is_valid():
+			edit.save()
+			bio.save()
+			return redirect('/recipes/profile/'+username)
+		else:
+			print(edit.errors, bio.errors)
+
+	return render(request, 'recipes/edit_profile.html', context_dict)
+
+@login_required
 def change_password(request, username):
-        if request.method=='POST':
-                form  = PasswordChangeForm(data = request.POST, user=request.user)
-                if form.is_valid():
-                        form.save()
-                        update_session_auth_hash(request, form.user)
-                        #return redirect('/recipes/profile')
-                        #return HttpResponseRedirect(reverse('index'))
-                        return redirect('index')
-                else:
-                        return redirect('/recipes/profile/'+username+'/password')
-        else:
-                form=PasswordChangeForm(data = request.POST, user=request.user)
-                args = {'form':form}
-                return render(request, 'recipes/change_password.html', args)
-@login_required               
-def change_bio(request, username):
-        if request.method=='POST':
-                form  = UserChangeForm(data = request.POST, instance=request.user)
-                if form.is_valid():
-                        form.save()
-                        update_session_auth_hash(request, form.user)
-                        #return redirect('/recipes/profile')
-                        #return HttpResponseRedirect(reverse('index'))
-                        return redirect('index')
-                else:
-                        return redirect('/recipes/profile/'+username+'/edit_bio')
-        else:
-                form=UserChangeForm(data = request.POST, instance=request.user)
-                args = {'form':form}
-                return render(request, 'recipes/edit_bio.html', args)
-        
+	if request.method=='POST':
+		form = PasswordChangeForm(data=request.POST, user=request.user)
+		if form.is_valid():
+			form.save()
+			update_session_auth_hash(request, form.user)
+			return redirect('index')
+		else:
+			print("Passwords did not match.")
+	else:
+		form=PasswordChangeForm(data=request.POST, user=request.user)
+	context_dict = {'form':form}
+
+	return render(request, 'recipes/change_password.html', context_dict)
+
 def show_category(request, cat_name_slug):
 	context_dict = {}
 

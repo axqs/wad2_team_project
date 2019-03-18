@@ -54,7 +54,7 @@
 			{% if reviews %}
 				{% for review in reviews %}
 					<div class="recipe">
-						<a href="{% url 'userprofile' review.author.username %}"><img src="{{ MEDIA_URL }}{{ review.author.chef.photo }}" alt="Picture of {{ review.author }}" height="60"/></a>
+						<a href="{% url 'userprofile' review.author.username %}"><img src="{{ MEDIA_URL }}{{ review.author.chef.photo }}" alt="Picture of {{ review.author }}" width="80"/></a>
 						<div>
 							<strong>{{ review.rating }}, {{ review.author }}</strong> -- {{ review.title }}<br/>
 							{{ review.comment }}
@@ -69,8 +69,7 @@
 				{% if recipe %}
 					<div class="give">
 						<h3>Leave a Review</h3>
-						{% if form %}
-						<form id="review_form" onsubmit="create_review()" method="post" action={% url 'viewrecipe' recipe.slug %}>
+						<form id="review_form" method="post" action={% url 'viewrecipe' recipe.slug %}>
 							{% csrf_token %}
 							{% for field in form.visible_fields %}
 							{{ field.errors }}
@@ -79,9 +78,6 @@
 							{% endfor %}
 							<input type="submit" name="submit" value="Submit" />
 						</form>
-						{% else %}
-							<strong>Thank you for your review!</strong>
-						{% endif %}
 					</div>
 				{% endif %}
 			{% endif %}
