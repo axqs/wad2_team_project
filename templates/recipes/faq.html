@@ -3,7 +3,17 @@
 
 
 {% block js %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("p").hide();
+  });
+  $(".btn2").click(function(){
+    $("p").show();
+  });
+});
+</script>
 {% endblock %}
 
 
@@ -18,10 +28,13 @@
 {% block body_block %}
 
 <button class="button" onclick="document.getElementById('demo').innerHTML=Date()">The time is?</button>
-<p id="demo"></p>
+<h4 id="demo"></h4>
+<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="250" align="right"/></a>
 
 
 <h1> How can we help? </h1>
+
+<body>
 
 <h3> How do I make an account?</h3>
 
@@ -31,5 +44,8 @@
 
 <p> Yes, in order to leave a review and comment you have to be logged in. You can view all the recipes without being logged in. </p>
 
+<button class="btn1">Hide</button>
+<button class="btn2">Show</button>
+</body>
 
 {% endblock %}
