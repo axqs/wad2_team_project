@@ -1,6 +1,17 @@
 {% extends 'recipes/base.html' %}
 {% load staticfiles %}
 
+{% block js %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("button").click(function() {
+			alert("Thanks for leaving a review!");
+		});
+	});
+	</script>
+{% endblock %}
+
 {% block title_block %}
   {{ recipe.name }}
 {% endblock %}
@@ -76,7 +87,7 @@
 								{{ field.label }}<br/>
 								{{ field }}<br/>
 							{% endfor %}
-							<input type="submit" name="submit" value="Submit" />
+							<button type="submit" name="submit" value="Submit">Submit</button>
 						</form>
 					</div>
 				{% endif %}
