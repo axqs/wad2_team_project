@@ -12,6 +12,13 @@
 {% block body_block %}
 	<div class="account">
 		<div class ="user_info">
+			<div>
+				<img class="profile" src="{{ MEDIA_URL }}{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}"/><br/>
+				<strong>Username :</strong>   {{ chef.user.username }}<br>
+				<strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
+				<strong> Date joined :</strong> {{ chef.user.date_joined }}
+			</div>
+			<br/>
 			{% if chef.user.username == user.username %}
 				<div class="urls">
 					{% if user.is_authenticated %}
@@ -21,10 +28,6 @@
 				</div>
 				<br>
 			{% endif %}
-			<img class="profile" src="{{ MEDIA_URL }}{{ chef.photo }}" alt="Picture of {{ chef.user.first_name }}"/><br/>
-			<strong>Username :</strong>   {{ chef.user.username }}<br>
-			<strong>  Full name :</strong> {{ chef.user.get_full_name }}<br>
-			<strong> Date joined :</strong> {{ chef.user.date_joined }}
 		</div>
 
 		<div class="user_recipes">
