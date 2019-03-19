@@ -41,7 +41,7 @@ class Recipe(models.Model):
 	slug = models.SlugField(unique=True)
 	categories = models.ManyToManyField(Category)
 	name = models.CharField(max_length=128, unique=True)
-	photo = models.ImageField(upload_to='food_pics', blank=True)
+	photo = models.ImageField(upload_to='food_pics')
 	cook_time = models.IntegerField(default=0)
 	date_posted = models.DateTimeField(default=timezone.now)
 	ingredients = models.TextField(default="")

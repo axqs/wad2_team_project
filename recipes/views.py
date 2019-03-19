@@ -124,10 +124,11 @@ def contact(request):
 			print(form.errors)
 	return render(request, 'recipes/contact.html', {'form':form})
 
+@login_required
 def addrecipe(request):
-	form = AddRecipeForm()
+	form = AddRecipeForm(request.FILES)
 	if request.method == 'POST':
-		form = AddRecipeForm(data=request.POST)
+		form = AddRecipeForm(request.POST, request.FILES)
 		if form.is_valid():
 			recipe = form.save(commit=False)
 			recipe.chef = request.user.username

@@ -66,7 +66,7 @@ class AddRecipeForm(forms.ModelForm):
 		("18","Valentine's Day"),
 	)
 	name = forms.CharField(widget=forms.TextInput(), help_text="Give your recipe a name", required=True)
-	photo = forms.ImageField()
+	photo = forms.ImageField(required=True)
 	cook_time = forms.IntegerField(min_value=0, initial=0, help_text="in minutes", required=True)
 	about = forms.CharField(widget=forms.Textarea(), label="Description", required=True)
 	ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredients", required=True)
