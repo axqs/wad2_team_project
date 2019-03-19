@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block body_block %}
+<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="250" align="right"/></a>
 	{% if chefs %}
 		{% for chef in chefs %}
 			<div>

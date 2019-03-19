@@ -11,6 +11,7 @@
 
 {% block body_block %}
     <form id="contactus_form" method="post" action={% url 'contact' %}>
+<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="300" align="right"/></a>
 		{% csrf_token %}
 		{% for field in form.visible_fields %}
 			{{ field.errors }}
