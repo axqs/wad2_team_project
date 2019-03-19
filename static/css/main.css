@@ -229,12 +229,13 @@ div.recipe img:hover{
 }
 
 /*faqs*/
+
 .button {
-    background-color: skyblue;
+    background-color: #467DA2;
     color: white;
     text-align: center;
+    font-size: 16px;
     cursor: pointer;
-    
 }
 
 
