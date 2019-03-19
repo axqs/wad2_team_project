@@ -27,8 +27,10 @@ $(document).ready(function(){
 
 {% block body_block %}
 
-<button class="button" onclick="document.getElementById('demo').innerHTML=Date()">The time is?</button>
+<button class="button" onclick="document.getElementById('demo').innerHTML=Date()">What is the time?</button>
+
 <h4 id="demo"></h4>
+
 <a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="250" align="right"/></a>
 
 
