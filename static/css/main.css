@@ -227,3 +227,15 @@ div.recipe img{
 div.recipe img:hover{
 	opacity: 0.7;
 }
+
+/*faqs*/
+
+.button {
+    background-color: #467DA2;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
