@@ -158,6 +158,9 @@ div.give {
 	height: 40vh;
 	overflow: hidden;
 }
+textarea {
+	width: 400px;
+}
 
 /* HOMEPAGE */
 
@@ -228,7 +231,7 @@ div.recipe img:hover{
 	opacity: 0.7;
 }
 
-/*faqs*/
+/* FAQS */
 
 .button {
     background-color: #467DA2;
@@ -237,6 +240,7 @@ div.recipe img:hover{
     font-size: 16px;
     cursor: pointer;
 }
+<<<<<<< HEAD
 
 .btn2 {
     background-color: #467DA2;
@@ -255,3 +259,5 @@ div.recipe img:hover{
     cursor: pointer;
 }
 
+=======
+>>>>>>> ad9f3c53085b5571378a0edc4a4ede6f9e04c20c

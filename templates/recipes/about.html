@@ -1,6 +1,22 @@
 {% extends 'recipes/base.html' %}
 {% load staticfiles %}
 
+{% block js %}
+<script type="text/javascript">
+	function loadDoc(url) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("about_creator").innerHTML =
+				this.responseText;
+			}
+		};
+		xhttp.open("GET", url , true);
+		xhttp.send();
+	}
+</script>
+{% endblock %}
+
 {% block title_block %}
   About
 {% endblock %}
@@ -10,17 +26,18 @@
 {% endblock %}
 
 {% block body_block %}
-<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="250" align="right"/></a>
 	{% if chefs %}
 		{% for chef in chefs %}
-			<div>
 				{% if chef.user.is_staff %}
-					<img src="{{ MEDIA_URL }}{{ chef.photo }}" alt="Picture of {{ chef.user.get_full_name }}" height="100" />
+					{% with abouturl="/static/about_"|add:chef.user.username|add:".txt" %}
+						<button type="submit" onclick="loadDoc('{{ abouturl }}')"><img src="{{ MEDIA_URL }}{{ chef.photo }}" alt="Picture of {{ chef.user.get_full_name }}" height="100" /></button>
+					{% endwith %}
 				{% endif %}
-			</div>
 		{% endfor %}
 	{% else %}
 		<strong>There are no admins present.</strong>
 	{% endif %}
+	<br/>
+	<div id="about_creator"></div>
 	<h4> This website was designed by Lynda, Amy, Qiufei and Eve </h4>
 {% endblock %}

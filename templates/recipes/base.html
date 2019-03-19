@@ -6,13 +6,13 @@
 		<meta charset="utf-8" />
 		<link href="{% static 'css/main.css' %}" rel="stylesheet" />
 		<script src="{% static 'js/scripts.js' %}"></script>
-		{% block js %}
-		{% endblock %}
 		<title>
 			Nbhd Cookbook -
 			{% block title_block %}
 			{% endblock %}
-	    </title>
+		</title>
+		{% block js %}
+		{% endblock %}
 	</head>
  	<div class="header">
 		<div class="logo">
