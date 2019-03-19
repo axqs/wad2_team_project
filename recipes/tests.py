@@ -53,23 +53,23 @@ class NeighbourhoodCookbookIndexPageTests(TestCase):
             cat = None
         return cat
     #2
-    def test_index_contains_recipes(self):
+    def test_index_contains_popularcuisines(self):
         # Check if there is a welcome message
         print(TestCase)
         response = self.client.get(reverse('index'))
-        self.assertIn(b'Recipes', response.content)
+        self.assertIn(b'Popular Cuisines', response.content)
     #3
-    def test_index_contains_categories(self):
+    def test_index_contains_latestposts(self):
         # Check if there is a welcome message
         print(TestCase)
         response = self.client.get(reverse('index'))
-        self.assertIn(b'Categories', response.content)
+        self.assertIn(b'Latest Posts', response.content)
     #4
-    def test_index_contains_reviews(self):
+    def test_index_contains_toprated(self):
         # Check if there is a welcome message
         print(TestCase)
         response = self.client.get(reverse('index'))
-        self.assertIn(b'Reviews', response.content)
+        self.assertIn(b'Top Rated Recipes', response.content)
                       
     #5
     def test_index_using_template(self):
@@ -196,7 +196,7 @@ class NeighbourhoodCookbookModelTests(TestCase):
     #20
     def test_special_occasions_cat_with_likes(self):
         cat = self.get_category('Special Occasions')
-        self.assertEqual(cat.likes, 16)
+        self.assertEqual(cat.likes, 160)
     #21
     def test_dessert_cat_with_likes(self):
         cat = self.get_category('Dessert')
@@ -284,357 +284,6 @@ class NeighbourhoodOtherViewTests(TestCase):
             # Check if in the categories page contains a category
             response = self.client.get(reverse('categories'))
             self.assertIn(cat, response.content)
-
-
-class NCChapter6ViewTests(TestCase):
-
-    def setUp(self):
-        try:
-            from populate_rango import populate
-            populate()
-        except ImportError:
-            print('The module populate_rango does not exist')
-        except NameError:
-            print('The function populate() does not exist or is not correct')
-        except:
-            print('Something went wrong in the populate() function :-(')
-
-
-    # are categories displayed on index page?
-
-    # does the category model have a slug field?
-
-
-    # test category view does the page exist?
-
-
-    # test whether you can navigate from index to a category page
-
-
-    # test does index page contain top five pages?
-
-    # test does index page contain the words "most liked" and "most viewed"
-
-    # test does category page contain a link back to index page?
-
-
-
-class NCChapter7ViewTests(TestCase):
-
-    def setUp(self):
-        try:
-            from forms import PageForm
-            from forms import CategoryForm
-
-        except ImportError:
-            print('The module forms does not exist')
-        except NameError:
-            print('The class PageForm does not exist or is not correct')
-        except:
-            print('Something else went wrong :-(')
-
-    pass
-    # test is there a PageForm in rango.forms
-
-    # test is there a CategoryForm in rango.forms
-
-    # test is there an add page page?
-
-    # test is there an category page?
-
-
-    # test if index contains link to add category page
-    #<a href="/rango/add_category/">Add a New Category</a><br />
-
-
-    # test if the add_page.html template exists.
-
-#--------------------------------------------------------------------------------
-#original ch 3 tests
-class NeighborhoodCookbookLiveServerTests(StaticLiveServerTestCase):
-    def setUp(self):
- #       driver = webdriver.Chrome('/chromedriver')
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('headless')
-        self.browser = webdriver.Chrome(chrome_options = chrome_options)
-        self.browser.implicitly_wait(3)
-
-    @classmethod
-    def setUpClass(cls):
-        cls.host = socket.gethostbyname(socket.gethostname())
-        super(NeighborhoodCookbookLiveServerTests, cls).setUpClass()
-
-    def tearDown(self):
-        self.browser.refresh()
-        self.browser.quit()
-
-
- #ALL the navigation testing
-    #31
-    def test_navigate_from_index_to_about(self):
-        # Go to recipes main page
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        print(url)
-        self.browser.get(url + reverse('index'))
-
-        # Search for a link to About page
-        about_link = self.browser.find_element_by_partial_link_text("About")
-        about_link.click()
-
-        # Check if it goes back to the home page
-        self.assertIn(url + reverse('about'), self.browser.current_url)
-    #32
-    def test_navigate_from_about_to_index(self):
-        # Go to recipes main page
-        self.client.get(reverse('index'))
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('about'))
-
-        # Check if there is a link back to the home page
-        # link_to_home_page = self.browser.find_element_by_tag_name('a')
-        link_to_home_page = self.browser.find_element_by_link_text('Index')
-        link_to_home_page.click()
-
-        # Check if it goes back to the home page
-        self.assertEqual(url + reverse('index'), self.browser.current_url)
-#----------------------------------------------------------------------------
-    #33
-    def test_navigate_from_index_to_contactus(self):
-        # Go to recipes main page
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        print(url)
-        self.browser.get(url + reverse('index'))
-
-        # Search for a link to contactus page
-        contact_us_link = self.browser.find_element_by_partial_link_text("Contact")
-        contact_us_link.click()
-        #Check if it goes back to the home page
-        self.assertIn(url + reverse('contactus'), self.browser.current_url)
-
-    #34
-    def test_navigate_from_contactus_to_index(self):
-        # Go to recipes main page
-        self.client.get(reverse('index'))
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('contactus'))
-
-        # Check if there is a link back to the home page
-        # link_to_home_page = self.browser.find_element_by_tag_name('a')
-        link_to_home_page = self.browser.find_element_by_link_text('Index')
-        link_to_home_page.click()
-
-        # Check if it goes back to the home page
-        self.assertEqual(url + reverse('index'), self.browser.current_url)
-#----------------------------------------------------------------------------
-    #35
-    def test_navigate_from_index_to_faqs(self):
-        # Go to recipes main page
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        print(url)
-        self.browser.get(url + reverse('index'))
-
-        # Search for a link to faqs page
-        faqs_link = self.browser.find_element_by_partial_link_text("FAQs")
-        faqs_link.click()
-        #Check if it goes back to the home page
-        self.assertIn(url + reverse('faqs'), self.browser.current_url)
-
-    #36
-    def test_navigate_from_faqs_to_index(self):
-        # Go to recipes main page
-        self.client.get(reverse('index'))
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('faqs'))
-
-        # Check if there is a link back to the home page
-        # link_to_home_page = self.browser.find_element_by_tag_name('a')
-        link_to_home_page = self.browser.find_element_by_link_text('Index')
-        link_to_home_page.click()
-
-        # Check if it goes back to the home page
-        self.assertEqual(url + reverse('index'), self.browser.current_url)
-#----------------------------------------------------------------------------
-    #37
-    def test_navigate_from_index_to_suggestcuisine(self):
-        # Go to recipes main page
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        print(url)
-        self.browser.get(url + reverse('index'))
-
-        # Search for a link to contactus page
-        suggest_cuisine_link = self.browser.find_element_by_partial_link_text("SuggestCuisine")
-        suggest_cuisine_link.click()
-        #Check if it goes back to the home page
-        self.assertIn(url + reverse('suggestion'), self.browser.current_url)
-
-    #38
-    def test_navigate_from_suggestcuisine_to_index(self):
-        # Go to recipes main page
-        self.client.get(reverse('index'))
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('suggestion'))
-
-        # Check if there is a link back to the home page
-        # link_to_home_page = self.browser.find_element_by_tag_name('a')
-        link_to_home_page = self.browser.find_element_by_link_text('Index')
-        link_to_home_page.click()
-
-        # Check if it goes back to the home page
-        self.assertEqual(url + reverse('index'), self.browser.current_url)
-
-
-#--------------------------------------------------------------------------------------------------------------------
-#look at models.py to create test for the subcategories
-        #git pull first though
-class NeighbourhoodCookbookLiveServerTests2(StaticLiveServerTestCase):
-
-    def setUp(self):
-        from django.contrib.auth.models import User
-        User.objects.create_superuser(username='admin', password='admin', email='admin@me.com')
-        #chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument("test-type")
-        #self.browser = webdriver.Chrome(chrome_options=chrome_options)
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('headless')
-        self.browser = webdriver.Chrome(chrome_options = chrome_options)
-        self.browser.implicitly_wait(3)
-
-    @classmethod
-    def setUpClass(cls):
-        cls.host = socket.gethostbyname(socket.gethostname())
-        super(NeighbourhoodCookbookLiveServerTests2, cls).setUpClass()
-
-    def tearDown(self):
-        self.browser.refresh()
-        self.browser.quit()
-    #39
-    def test_population_script(self):
-        #Populate database
-        populate_recipes.populate()
-        url = self.live_server_url
-        #url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('admin:index'))
-
-        # Log in the admin page
-        test_utils.login(self)
-
-        # # Check if is there link to categories
-        # category_link = self.browser.find_elements_by_partial_link_text('Categor')
-        # print(category_link[0].text)
-        # category_link[0].click()
-
-        # Check for the categories saved by the population script
-        # self.browser.find_elements_by_partial_link_text('Other Frameworks')
-        # self.browser.find_elements_by_partial_link_text('Django')
-        # self.browser.find_elements_by_partial_link_text('Python')
-
-        # Check the recipes saved by the population script
-        self.browser.get(url + reverse('admin:rango_page_changelist'))
-        self.browser.find_elements_by_partial_link_text('Pancakes')
-        self.browser.find_elements_by_partial_link_text('Chicken Pesto Panini')
-        self.browser.find_elements_by_partial_link_text('All-American Burger')
-        self.browser.find_elements_by_partial_link_text('Traditional Tiramisu')
-        self.browser.find_elements_by_partial_link_text("St Paddy's Shake")
-        self.browser.find_elements_by_partial_link_text('Spaghetti Carbonara')
-        self.browser.find_elements_by_partial_link_text('Classic Hot Dogs')
-        self.browser.find_elements_by_partial_link_text('Old School Beef Tacos')
-        self.browser.find_elements_by_partial_link_text('Easy Chicken Chow Mein')
-        self.browser.find_elements_by_partial_link_text('Chicken Curry')
-        self.browser.find_elements_by_partial_link_text('California Rolls')
-    #40
-    def test_admin_page_contains_name_cooktime_and_chef(self):
-        #Populate database
-        populate_recipes.populate()
-
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('admin:index'))
-
-        # Log in the admin page
-        test_utils.login(self)
-
-        # Click in Pages
-        recipes_link = self.browser.find_element_by_link_text('Recipes')
-        pages_link.click()
-
-        body = self.browser.find_element_by_tag_name('body')
-
-        # Get all pages
-        recipes = Recipe.objects.all()
-
-        # Check all recipes name, cook_time and chef are displayed
-        for recipe in recipes:
-            self.assertIn(recipe.name, body.text)
-            #self.assertIn(page.category.name, body.text)
-            self.assertIn(recipe.cook_time, body.text)
-            self.assertIn(recipe.chef, body.text)
-
-
-#chnage the links to be links of actual recipes pages
-        # Check for the Github account and PythonAnywhere account
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('http://www.djangorocks.com/', body.text)
-        self.assertIn('http://flask.pocoo.org', body.text)
-    #41
-    def test_can_create_new_category_via_admin_site(self):
-        #Access admin page
-        url = self.live_server_url
-        url = url.replace('localhost', '127.0.0.1')
-        self.browser.get(url + reverse('admin:index'))
-
-        # Check if it display admin message
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('Django administration', body.text)
-
-        # Log in the admin page
-        test_utils.login(self)
-
-        # the Site Administration page
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('Site administration', body.text)
-
-        # Check if is there link to categories
-        category_link = self.browser.find_elements_by_partial_link_text('Categor')
-        self.assertEquals(len(category_link), 1)
-
-        # Click in the link
-        category_link[0].click()
-
-        # Empty, so check for the empty message
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('0 categor', body.text.lower())
-
-        # Add a category by clicking on 'Add category
-        # new_poll_link = self.browser.find_element_by_link_text('Add category')
-        new_poll_link = self.browser.find_element_by_class_name('addlink')
-        new_poll_link.click()
-
-        # Check for input field
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('Name:'.lower(), body.text.lower())
-
-        # Input category name
-        category_field = self.browser.find_element_by_name('name')
-        category_field.send_keys("Test Driven Development")
-
-        # Leave likes and views as 0
-
-         # Gertrude clicks the save button
-        save_button = self.browser.find_element_by_css_selector("input[value='Save']")
-        save_button.click()
-
-        # As redirected there is a link for the category
-        # category_link1 = self.browser.find_elements_by_link_text("Test Driven Development")
-
-        # self.assertEquals(len(category_link1), 0)
 
 
 class Chapter5ModelTests(TestCase):
@@ -732,7 +381,7 @@ class Chapter5ModelTests(TestCase):
 
         # Check if the category has correct number of likes
         cat = Category.objects.get(name='Special Occasions')
-        self.assertEquals(cat.likes, 16)
+        self.assertEquals(cat.likes, 160)
 
         # Check if the category has correct number of likes
         cat = Category.objects.get(name='Breakfast')
