@@ -10,14 +10,16 @@
 {% endblock %}
 
 {% block body_block %}
-	<form id="addrecipe" method="post" action={% url 'addrecipe' %}>
+	<form id="addrecipe" method="post" enctype="multipart/form-data" action={% url 'addrecipe' %}>
 		{% csrf_token %}
 		{% for field in form.visible_fields %}
 			<strong>{{ field.label }}</strong>
 			{% if field.help_text %}
 				{{ field.help_text }}
 			{% endif %}<br/>
-			{{ field.errors }}
+			{% if errors %}
+				{{ field.errors }}
+			{% endif %}
 			{{ field }}<br/>
 		{% endfor %}
 		<input type="submit" name="submit" value="Add Recipe" />
