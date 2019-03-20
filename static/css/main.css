@@ -44,6 +44,7 @@ header {
 	top: 0;
 	width: 100%;
 	background-color: #09203D;
+    opacity: 0.95;
 	padding: 1em;
 	background-color: #09203D;
 	text-decoration: none;
@@ -79,6 +80,7 @@ div.page_name {
 }
 footer {
 	position: fixed;
+    opacity: 0.95;
 	left: 0;
 	bottom: 0;
 	width: 100%;
