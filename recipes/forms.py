@@ -78,6 +78,12 @@ class AddRecipeForm(forms.ModelForm):
 		model = Recipe
 		fields = ('name','photo','cook_time','categories')
 
+	def save(self, user):
+		recipe = super(AddRecipeForm, self)
+		recipe.chef = request.user
+		recipe.save()
+		return recipe;
+
 class EditProfileForm(UserChangeForm):
 	class Meta:
 		model = User

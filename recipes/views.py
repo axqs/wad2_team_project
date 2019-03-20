@@ -126,19 +126,18 @@ def contact(request):
 
 @login_required
 def addrecipe(request):
-	form = AddRecipeForm(request.FILES, request.FILES)
+	form = AddRecipeForm(request.FILES)
 	if request.method == 'POST':
 		form = AddRecipeForm(request.POST, request.FILES)
 		if form.is_valid():
-			recipe = form.save(commit=False)
-			recipe.chef = request.user.username
+			recipe = form.save(request.user)
 			cats = form.cleaned_data.get('categories')
 			if(len(cats) > 3):
 				raise forms.ValidationError("You can't select more than 3 items.")
 			else:
 				for cat in cats:
 					category = Category.objects.get(id=cat)
-					recipes.categories.add(category)
+					recipe.categories.add(category)
 			recipe.save()
 			return HttpResponseRedirect(reverse('index'))
 		else:
