@@ -71,15 +71,17 @@ class AddRecipeForm(forms.ModelForm):
 	about = forms.CharField(widget=forms.Textarea(), label="Description", required=True)
 	ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredients", required=True)
 	steps = forms.CharField(widget=forms.Textarea(), label="Steps", required=True)
-	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+	#slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 	categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True, help_text="Up to three")
 
 	class Meta:
 		model = Recipe
-		fields = ('name','photo','cook_time','categories')
+		fields = ('name','photo','cook_time','categories','about','ingredients','steps')
 
-	def save(self, user):
-		self.chef = user
+	def save(self, username):
+		author = User.objects.get(username=username)
+		self.chef = author
+		print(self.cleaned_data)
 		recipe = super(AddRecipeForm, self).save(commit=False)
 		return recipe;
 

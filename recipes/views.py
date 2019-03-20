@@ -130,11 +130,13 @@ def addrecipe(request):
 	if request.method == 'POST':
 		form = AddRecipeForm(request.POST, request.FILES)
 		if form.is_valid():
-			recipe = form.save(request.user)
+			recipe = form.save(request.user.username)
+			recipe.chef = request.user
 			cats = form.cleaned_data.get('categories')
 			if(len(cats) > 3):
 				raise forms.ValidationError("You can't select more than 3 items.")
 			else:
+				recipe.save()
 				for cat in cats:
 					category = Category.objects.get(id=cat)
 					recipe.categories.add(category)
