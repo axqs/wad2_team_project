@@ -249,15 +249,17 @@ div.recipe img:hover{
     font-size: 16px;
     cursor: pointer;
 }
-.btn2 {
+.btn1, .btn2 {
     background-color: #467DA2;
     color: white;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
 
+    
 }
-.btn1 {
+
+.btn4, .btn3 {
     background-color: #467DA2;
     color: white;
     text-align: center;

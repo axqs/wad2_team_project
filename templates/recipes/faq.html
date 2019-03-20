@@ -14,12 +14,25 @@
 			});
 		});
 	</script>
+	
+    <script>
+		$(document).ready(function(){
+			$(".btn3").click(function(){
+				$("p1").hide();
+			});
+			$(".btn4").click(function(){
+				$("p1").show();
+			});
+		});
+	</script>
 {% endblock %}
 
 
 {% block title_block %}
     FAQ
 {% endblock %}
+
+<a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Website Logo" width="300" align="right"/></a>
 
 {% block name_block %}
 	FAQs
@@ -37,11 +50,15 @@
 
 <p> You can make an account using our sign up option located at the top of the screen </p>
 
+<button class="btn1">Hide Answer</button>
+<button class="btn2">Show Answer</button>
+
 <h3> Do I have to be logged in to leave a review? </h3>
 
-<p> Yes, in order to leave a review and comment you have to be logged in. You can view all the recipes without being logged in. </p>
+<p1> Yes, in order to leave a review and comment you have to be logged in. You can view all the recipes without being logged in. </p1>
 
-<button class="btn1">Hide</button>
-<button class="btn2">Show</button>
+<br> </br>
+<button class="btn3">Hide Answer </button>
+<button class="btn4">Show Answer </button>
 
 {% endblock %}
