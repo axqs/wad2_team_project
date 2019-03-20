@@ -79,9 +79,8 @@ class AddRecipeForm(forms.ModelForm):
 		fields = ('name','photo','cook_time','categories')
 
 	def save(self, user):
-		recipe = super(AddRecipeForm, self)
-		recipe.chef = request.user
-		recipe.save()
+		self.chef = user
+		recipe = super(AddRecipeForm, self).save(commit=False)
 		return recipe;
 
 class EditProfileForm(UserChangeForm):

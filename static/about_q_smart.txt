@@ -1,0 +1,6 @@
+<h1> Q Smart</h1>
+
+yay the ajax is working
+<p>
+
+<a href="https://instagram.com/q.s.photos">Instagram</a>
