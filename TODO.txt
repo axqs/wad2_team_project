@@ -1,3 +1,7 @@
+General/Presentation todo:
+- deploy on PythonAnywhere (once all edits done)
+- Submit slides
+
 Website todo:
 - finish test cases
 - favorite recipes for each user
