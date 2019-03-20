@@ -24,7 +24,7 @@
 					<li style="float:right; padding-top:12px; padding-left:5px;"><a href="{% url 'addrecipe' %}">Add Recipe</a></li>
 					<li style="float:right; padding-top:12px; padding-left:5px;"><a href="{% url 'userprofile' user.username %}">My Account</a></li>
 				{% else %}
-					<li style="float:right; padding-top:12px; padding-left:5px;"><a href="{% url 'login' %}">Login</a></li>
+					<li style="float:right; padding-top:12px; padding-left:5px; padding-right:30px;"><a href="{% url 'login' %}">Login</a></li>
 					<li style="float:right; padding-top:12px; padding-left:5px;"><a href="{% url 'register' %}">Sign Up</a></li>
 				{% endif %}
 				<li style="float:right; padding-top:12px; padding-left:5px;"><a href="{% url 'categories' %}">Categories</a></li>
