@@ -186,10 +186,13 @@ div.index_page {
 }
 div.index_page img{
 	width: 100%;
+    position: relative;    
 }
 div.index_page img:hover{
 	opacity: 0.7;
+    bottom: 5px;
 }
+
 div.latest_posts {
 	overflow: hidden;
 	text-align: center;
