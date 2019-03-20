@@ -209,7 +209,7 @@ div.top_rated {
 
 /* PROFILE PAGE*/
 div.account {
-	height: 70vh;
+	height: inherit;
 	padding-left: 2em;
 	padding-right: 2em;
 	grid-column-gap: 1em;
@@ -256,7 +256,7 @@ div.recipe img:hover{
     font-size: 16px;
     cursor: pointer;
 
-    
+
 }
 
 .btn4, .btn3 {
