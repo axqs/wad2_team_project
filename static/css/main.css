@@ -89,9 +89,11 @@ div.cat img{
 	max-width: 20em;
 	width: 18.75em;
 	height: 12.5em;
+    position: relative;
 }
 div.cat img:hover{
 	opacity: 0.7;
+    bottom: 5px;
 }
 div.cat_text{
 	padding: 2%;
