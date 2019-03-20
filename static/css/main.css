@@ -191,8 +191,7 @@ div.index_page img:hover{
 	opacity: 0.7;
 }
 div.latest_posts {
-	height: 100%;
-	overflow-y: scroll;
+	overflow: hidden;
 	text-align: center;
 }
 div.latest_posts img.index-logo{
@@ -201,11 +200,9 @@ div.latest_posts img.index-logo{
 	width: 60%;
 }
 div.pop_cuisines {
-	height: inherit;
 	overflow: scroll;
 }
 div.top_rated {
-	height: inherit;
 	overflow: scroll;
 }
 
