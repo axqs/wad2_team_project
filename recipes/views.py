@@ -126,7 +126,7 @@ def contact(request):
 
 @login_required
 def addrecipe(request):
-	form = AddRecipeForm(request.FILES)
+	form = AddRecipeForm(request.FILES, request.FILES)
 	if request.method == 'POST':
 		form = AddRecipeForm(request.POST, request.FILES)
 		if form.is_valid():
