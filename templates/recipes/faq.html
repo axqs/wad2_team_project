@@ -4,7 +4,8 @@
 
 {% block js %}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
 		$(document).ready(function(){
 			$(".btn1").click(function(){
 				$("p").hide();
@@ -12,9 +13,8 @@
 			$(".btn2").click(function(){
 				$("p").show();
 			});
-		});
-	</script>
-	
+		});</script>
+
     <script>
 		$(document).ready(function(){
 			$(".btn3").click(function(){
@@ -24,7 +24,7 @@
 				$("p1").show();
 			});
 		});
-	</script>
+    </script>
 {% endblock %}
 
 
