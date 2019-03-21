@@ -231,6 +231,27 @@ div.latest_posts {
 	overflow: scroll;
 	text-align: center;
 }
+
+div.login_page {
+    width: 300px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+
+    
+}
+
+div.register_page{
+    width: 300px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+
+}
+    
+}
 div.latest_posts img.index-logo{
 	position: static;
 	text-align: center;
@@ -287,7 +308,12 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-}
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px; 
+    width: 90px;
+    height: 35px;
+}   
 .btn1, .btn2 {
     background-color: #467DA2;
     color: white;
@@ -301,12 +327,9 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-}
 
-/* ABOUT PAGE */
 
-div.about {
-	text-align: center;
-	width: 100%;
-	margin: 0 auto;
-}
+/* LOGIN */
+
+
+
