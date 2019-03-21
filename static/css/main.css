@@ -24,7 +24,7 @@ h2, h3 {
 }
 
 h7 {
-    font-size: 40px;
+	font-size: 40px;
 	color: #3A1003;
 
 }
@@ -124,6 +124,7 @@ div.cat_text{
 	text-align: center;
 	bottom: 1em;
 	font-size: 1em;
+	box-shadow: 3px 3px 3px grey;
 }
 div.cat img{
 	position: relative;
@@ -131,6 +132,7 @@ div.cat img{
 	max-width: 20em;
 	width: 18.75em;
 	height: 12.5em;
+	box-shadow: 3px 3px 3px grey;
 }
 div.cat img:hover{
     bottom: 7px;
@@ -217,7 +219,7 @@ div.index_page {
 }
 div.index_page img{
 	width: 100%;
-    position: relative;
+	position: relative;
 }
 div.index_page img:hover{
 	bottom: 7px;
@@ -231,7 +233,7 @@ div.latest_posts img.index-logo{
 	text-align: center;
 	width: 60%;
 	padding: 0.25em;
-	background-color: rgba(220, 220, 220, 0.65);
+	background-color: rgba(220, 220, 220, 0.45);
 	border-style: outset;
 }
 div.pop_cuisines {
@@ -296,4 +298,12 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* ABOUT PAGE */
+
+div.about {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
 }

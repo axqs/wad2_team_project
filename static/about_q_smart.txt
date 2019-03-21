@@ -2,4 +2,4 @@
 
 Q is a second year computing science student from California. She enjoys photography in her spare time. </br>
 </br>
-<Strong> <a href="https://instagram.com/q.s.photos">Instagram</a> </Strong>
+<strong><a href="https://instagram.com/q.s.photos">Instagram</a></strong>
