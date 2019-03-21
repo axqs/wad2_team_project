@@ -6,22 +6,23 @@ from selenium import webdriver
 from django.core.urlresolvers import reverse
 import os
 import socket
-
-# Create your tests here.
-
-#so this is to be run in the way described in the book, not the complicated way with rango_tests folder!
-#take tests from rango_tests folder for ideas but for actual tests u want one file
-#The django mini book tests are as below
-#Make tests based on not chapter but on page view, so sort these out based on
-#the view they belong to
+#Tests are adapted from How to Tango with Django and rango_tests which were used
+#last semester to test our submission with django.
 
 #------------------------------------------------------------------------------------------------
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.staticfiles import finders
-from recipes.models import Chef, Category, Recipe, Review, Suggestion
-import populate_recipes
+from recipes.models import *
+from recipes.forms import *
+import populate_script as populate_recipes
 import recipes.test_utils as test_utils
+
+#Chapter 9
+from recipes.forms import UserForm, ChefForm
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.storage import default_storage
+from recipes.decorators import chapter9
 
 class NeighbourhoodCookbookGeneralTests(TestCase):
 
@@ -118,7 +119,7 @@ class NeighbourhoodCookbookAboutPageTests(TestCase):
     def test_about_contains_about_message(self):
         # Check if in the about page is there - and contains the specified message
         response = self.client.get(reverse('about'))
-        self.assertIn(b'About', response.content)
+        self.assertIn(b'About The Creators', response.content)
         #do we need the b?^
     #10
     def test_about_contain_any_img(self):
@@ -127,10 +128,10 @@ class NeighbourhoodCookbookAboutPageTests(TestCase):
         self.assertIn(b'img', response.content)
 
     #11
-    def test_about_contain_profile_image(self):
+    def test_about_contains_default_page(self):
         # Check if is there an image of at least one of us on the about page
         response = self.client.get(reverse('about'))
-        self.assertIn(b'img src="/media/profile_pics', response.content)
+        self.assertIn(b'There are no admins present', response.content)
 
     #12
     def test_about_using_template(self):
@@ -143,7 +144,7 @@ class NeighbourhoodCookbookModelTests(TestCase):
 
     def setUp(self):
         try:
-            from populate_recipes import populate
+            from populate_script import populate
             populate()
         except ImportError:
             print('The module populate_recipes does not exist')
@@ -310,29 +311,29 @@ class Chapter5ModelTests(TestCase):
     #42
     def test_create_a_new_category(self):
         categories_in_database = Category.objects.all()
-        self.assertEquals(len(categories_in_database), 18)
-        from populate_recipes import add_cat
+        self.assertEquals(len(categories_in_database), 0)
+        from populate_script import add_cat
         cat = Category(name="create_a_new_category_test")
         cat.save()
         categories_in_database = Category.objects.all()
         # Check category is in database. 18 categories exist already, so we want
         #to make sure that there is now 19
-        self.assertEquals(len(categories_in_database), 19)
+        self.assertEquals(len(categories_in_database), 1)
         #category gets appended onto last
-        last_poll_in_database = categories_in_database[18]
+        last_poll_in_database = categories_in_database[0]
         self.assertEquals(last_poll_in_database, cat)
     #43
     def test_create_recipes_for_categories(self):
-        from populate_recipes import add_user, add_cat, add_recipe
+        from populate_script import add_user, add_cat, add_recipe
         #check that categories is 18 to start with
         categories_in_database = Category.objects.all()
-        self.assertEquals(len(categories_in_database), 18)
+        self.assertEquals(len(categories_in_database), 0)
         #add the vegan category
         cat = Category(name="Vegan")
         cat.save()
         # Check Vegan is in database. 19 categories should exist now
         categories_in_database = Category.objects.all()
-        self.assertEquals(len(categories_in_database), 19)
+        self.assertEquals(len(categories_in_database), 1)
 
         chef=add_user("new_user", {"email":"newuser@gmail.com", "password":"newuser", "fname":"New", "lname":"User", "chef":True, "photo":"anon.png",})
         # create 2 pages for category python
@@ -402,3 +403,38 @@ class Chapter5ModelTests(TestCase):
         # Check if the category has correct number of likes
         cat = Category.objects.get(name='Cuisines')
         self.assertEquals(cat.likes, 160)
+
+class MoreNCViewTests(TestCase):
+
+    @chapter9
+    def test_registration_form_is_displayed_correctly(self):
+        #Access registration page
+        try:
+            response = self.client.get(reverse('register'))
+        except:
+            try:
+                response = self.client.get(reverse('recipes:register'))
+            except:
+                return False
+
+        # Check if form is rendered correctly
+        # self.assertIn('<h1>Register with Rango</h1>', response.content.decode('ascii'))
+        self.assertIn('Register here!'.lower(), response.content.decode('ascii').lower())
+
+        # Check form in response context is instance of UserForm
+        self.assertTrue(isinstance(response.context['user_form'], UserForm))
+
+        # Check form in response context is instance of UserProfileForm
+        self.assertTrue(isinstance(response.context['profile_form'], ChefForm))
+
+        user_form = UserForm()
+        profile_form = ChefForm()
+
+        # Check form is displayed correctly
+        self.assertEquals(response.context['user_form'].as_p(), user_form.as_p())
+        self.assertEquals(response.context['profile_form'].as_p(), profile_form.as_p())
+
+        # Check submit button
+        self.assertIn('type="submit"', response.content.decode('ascii'))
+        self.assertIn('name="submit"', response.content.decode('ascii'))
+        self.assertIn('value="Register"', response.content.decode('ascii'))
