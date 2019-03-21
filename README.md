@@ -13,11 +13,11 @@ Similarly, users can navigate the website's categories and recipes anonymously w
 cannot leave reviews or ratings or add recipes. Anonymous users can also read the About Us page
 to learn more about the creators of the Neighborhood Cookbook.
 
-How To Run:
-
-python manage.py makemigrations
-python manage.py migrate
-python populate_script.py
-python manage.py runserver
+How To Run:<br/>
+<br/>
+python manage.py makemigrations<br/>
+python manage.py migrate<br/>
+python populate_script.py<br/>
+python manage.py runserver<br/>
 
 The site is available on https://localhost:8000
