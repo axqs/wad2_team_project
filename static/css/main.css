@@ -351,3 +351,33 @@ div.add {
     margin: 0 auto;
     text-align: center;
 }
+
+div.container {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 25px;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+
+.edit {
+    background-color: #467DA2;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px;
+    width: 120px;
+    height: 50px;
+}
+
+div.suggest{
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 25px;
+    margin: 0 auto;
+    text-align: center;
+}
