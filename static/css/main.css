@@ -205,7 +205,7 @@ div.index_page {
 	position: fixed;
 	display: grid;
 	height: 79%;
-	grid-template-columns: auto 50em auto;
+	grid-template-columns: auto 60% auto;
 	justify-content: center;
 	grid-column-gap: 3em;
 	padding-left: 4em;
@@ -310,7 +310,7 @@ textarea {
 	width: 400px;
 }
 div.login_page {
-    width: 350px;
+    width: 400px;
     border: 15px solid #09203D;
     padding: 15px;
     margin: auto;
