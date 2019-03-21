@@ -85,7 +85,6 @@ div.urls a{
 }
 div.urls a:hover{
 	background-color: #467DA2;
-
 }
 div.page_name {
 	padding-top: 0.2em;
@@ -277,7 +276,7 @@ div.recipe img:hover{
 
 /* FAQS */
 
-.button {
+input.button {
     background-color: #467DA2;
     color: white;
     text-align: center;
@@ -289,19 +288,7 @@ div.recipe img:hover{
     width: 90px;
     height: 35px;
 }
-.btn1, .btn2 {
-    background-color: #467DA2;
-    color: white;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 15px;
-    border: 2px solid #09203D;
-    padding: 3px;
-    width: 100px;
-    height: 45px;
-}
-.btn4, .btn3 {
+.btn1, .btn2, .btn4, .btn3 {
     background-color: #467DA2;
     color: white;
     text-align: center;
