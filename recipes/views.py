@@ -18,11 +18,11 @@ def index(request):
 	#get all recipes, order alphabetically by name
 	latest = Recipe.objects.order_by('-date_posted')[:6]
 	#get all categories -- no order
-	cuisines = Category.objects.filter(type="CUS").order_by('-likes')[:6]
+	users = User.objects.order_by('-date_joined')[:6]
 
-	top = Recipe.objects.order_by('name')[:6]
+	top = Recipe.objects.order_by('cook_time')[:6]
 
-	context_dict = {'latest':latest, 'cuisines':cuisines, 'top':top}
+	context_dict = {'latest':latest, 'users':users, 'top':top}
 	response = render(request,'recipes/index.html', context=context_dict)
 	return response
 
@@ -194,21 +194,20 @@ def userprofile(request, username):
 
 @login_required
 def edit_profile(request, username):
-
-	edit = EditProfileForm(instance=request.user)
-	bio = EditBioForm(instance=request.user.chef)
-	context_dict = {'edit':edit,'bio':bio}
-
 	if request.method == 'POST':
-		edit = EditProfileForm(request.POST, instance=request.user)
-		bio  = EditBioForm(request.POST, instance=request.user.chef)
+		edit = EditProfileForm(request.POST, request.FILES, instance=request.user)
+		bio  = EditBioForm(request.POST, request.FILES, instance=request.user.chef)
 		if edit.is_valid() and bio.is_valid():
 			edit.save()
 			bio.save()
 			return redirect('/recipes/profile/'+username)
 		else:
 			print(edit.errors, bio.errors)
+	else:
+		edit = EditProfileForm(request.FILES, instance=request.user)
+		bio = EditBioForm(request.FILES, instance=request.user.chef)
 
+	context_dict = {'edit':edit,'bio':bio}
 	return render(request, 'recipes/edit_profile.html', context_dict)
 
 @login_required

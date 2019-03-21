@@ -365,11 +365,17 @@ div.suggest{
     margin: 0 auto;
     text-align: center;
 }
-
 div.faq_class {
     width: 760px;
     border: 15px solid #09203D;
     padding: 25px;
+    margin: 0 auto;
+    text-align: center;
+}
+div.chef_info{
+    width: 75%;
+    border: 10px solid #09203D;
+    padding: 15px;
     margin: 0 auto;
     text-align: center;
 }

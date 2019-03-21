@@ -10,11 +10,11 @@
 	<div class="index_page">
 
 		<div class="pop_cuisines">
-			<h3>Popular Cuisines</h3>
-			{% if cuisines %}
-				{% for cuisine in cuisines %}
-					<a href="{% url 'show_category' cuisine.slug %}"><img src="{{ MEDIA_URL }}{{ cuisine.photo }}" alt="Picture of {{ cuisine.photo }}"/></a>
-					<div class="cat_text">{{ cuisine.name }}</div>
+			<h3>New Chefs</h3>
+			{% if users %}
+				{% for u in users %}
+					<a href="{% url 'userprofile' u.username %}"><img src="{{ MEDIA_URL }}{{ u.chef.photo }}" alt="Picture of {{ u.get_full_name }}"/></a>
+					<div class="cat_text">{{ u.get_full_name }}</div>
 				{% endfor %}
 			{% endif %}
 		</div>
@@ -65,7 +65,7 @@
 		</div>
 
 		<div class="top_rated">
-			<h3>Top Rated Recipes</h3>
+			<h3>Featured Recipes</h3>
 			{% if top %}
 				{% for post in top %}
 					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>

@@ -12,7 +12,7 @@
 {% block body_block %}
 
 	<div class="edit_class">
-		<form id="editprofile" method="post" action="{% url 'edit_profile' user.username %}">
+		<form id="editprofile" method="post" enctype="multipart/form-data" action="{% url 'edit_profile' user.username %}">
 			{% csrf_token %}
 			{% for editfield in edit.visible_fields %}
 				{% if editfield.label != "Password" %}
