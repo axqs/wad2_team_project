@@ -34,6 +34,9 @@ h8 {
     font-style: italic;
     font-family: inherit;
 }
+div.center {
+    text-align: center;
+}
 
 /* BASE */
 
