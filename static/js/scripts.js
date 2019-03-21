@@ -1,18 +1,18 @@
-
+$("p").hide();
 $(document).ready(function(){
 	$(".btn1").click(function(){
-		$("p").hide();
+		$("#q1").hide();
 	});
 	$(".btn2").click(function(){
-		$("p").show();
+		$("#q1").show();
 	});
 });
 
 $(document).ready(function(){
 	$(".btn3").click(function(){
-		$("p1").hide();
+		$("#q2").hide();
 	});
 	$(".btn4").click(function(){
-		$("p1").show();
+		$("#q2").show();
 	});
 });
