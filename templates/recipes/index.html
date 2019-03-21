@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="latest_posts">
-			<img class="index-logo" src="{% static "images/logo.png" %}" alt="Website Logo" width="70%"/>
+			<img class="index-logo" src="{% static "images/logo.png" %}" alt="Website Logo" width="60%"/>
 			<div class="carousel">
 				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -35,16 +35,18 @@
 								<li data-target="#myCarousel" data-slide-to="{{ forloop.counter }}"></li>
 							{% endfor %}
 						</ol>
-
 						<!-- Wrapper for slides -->
-						<div class="carousel-inner" role="listbox" style=" width:100%; height: 400px !important;">
-							<div class="item active">
-								<a href="{% url 'viewrecipe' latest.0.slug %}"><img src="{{ MEDIA_URL }}{{ latest.0.photo }}" alt="Picture of {{ latest.0.photo }}" style="width:100%; height:400px;"/></a>
-							</div>
+						<div class="carousel-inner" role="listbox" style="width:100%; height: 400px !important;">
 							{% for recipe in latest %}
-								<div class="item">
-									<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}" style="width:100%; height:400px"/></a>
-								</div>
+								{% if forloop.counter0 == 0 %}
+									<div class="item active">
+										<a href="{% url 'viewrecipe' latest.0.slug %}"><img src="{{ MEDIA_URL }}{{ latest.0.photo }}" alt="Picture of {{ latest.0.photo }}" style="width:100%; height:400px;"/></a>
+									</div>
+								{% else %}
+									<div class="item">
+										<a href="{% url 'viewrecipe' recipe.slug %}"><img src="{{ MEDIA_URL }}{{ recipe.photo }}" alt="Picture of {{ recipe.photo }}" style="width:100%; height:400px"/></a>
+									</div>
+								{% endif %}
 							{% endfor %}
 						</div>
 						<!-- Left and right controls -->
@@ -59,15 +61,6 @@
 					</div>
 				</div>
 			</div>
-            <br>
-            <br>
-			<h2>Latest Posts</h2>
-<!--		{% if latest %}
-				{% for post in latest %}
-					<a href="{% url 'viewrecipe' post.slug %}"><img src="{{ MEDIA_URL }}{{ post.photo }}" alt="Picture of {{ post.photo }}"/></a>
-					<div class="cat_text">{{ post.name }}</div>
-				{% endfor %}
-			{% endif %}-->
 		</div>
 
 		<div class="top_rated">
@@ -82,6 +75,3 @@
 	</div>
 
 {% endblock %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

@@ -34,13 +34,6 @@ h8 {
     font-style: italic;
     font-family: inherit;
 }
-div.center {
-    text-align: center;
-}
-div.center2 {
-    text-align: center;
-    margin-left:430px;
-}
 
 /* BASE */
 
@@ -88,6 +81,7 @@ header ul li {
 div.urls a{
 	background-color: #09203D;
 	padding: 0.8em;
+	font-size: 1em;
 	color: #ffffff;
 	text-decoration: none;
 }
@@ -172,7 +166,7 @@ div.cat_bar h3{
 div.recipe_page{
 	position: fixed;
 	display: grid;
-	height: 70%;
+	height: 69%;
 	width: 100%;
 	grid-template-columns: 20% 45% 20%;
 	justify-content: left;
@@ -208,9 +202,6 @@ div.view {
 div.give {
 	overflow: hidden;
 }
-textarea {
-	width: 400px;
-}
 
 /* HOMEPAGE */
 
@@ -224,55 +215,20 @@ div.index_page {
 	padding-left: 4em;
 	padding-right: 4em;
 }
-div.index_page img{
-	width: 100%;
-	position: relative;
-}
-div.index_page img:hover{
-	bottom: 7px;
-}
-div.latest_posts {
-	overflow: scroll;
-	text-align: center;
-}
-
-div.login_page {
-    width: 300px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-
-    
-}
-
-div.register{
-    width: 400px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-    
-
-}
-
-div.contact {
-    width: 400px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-
-}
-    
-}
 div.latest_posts img.index-logo{
 	position: static;
 	text-align: center;
 	width: 60%;
 	padding: 0.25em;
 	background-color: rgba(220, 220, 220, 0.45);
-	border-style: outset;
+}
+div.index_page img{
+	width: 100%;
+	position: relative;
+}
+div.latest_posts {
+	overflow: scroll;
+	text-align: center;
 }
 div.pop_cuisines {
 	overflow: scroll;
@@ -280,12 +236,19 @@ div.pop_cuisines {
 div.top_rated {
 	overflow: scroll;
 }
+div.top_rated img:hover{
+	bottom: 7px;
+}
+div.pop_cuisines img:hover{
+	bottom: 7px;
+}
 
 /* PROFILE PAGE*/
+
 div.account {
 	position: fixed;
 	display: grid;
-	height: 80%;
+	height: 77%;
 	grid-template-columns: 25em auto;
 	justify-content: left;
 	grid-column-gap: 3em;
@@ -296,7 +259,7 @@ div.user_info img{
 	width: 100%;
 }
 div.user_recipes {
-	height: inherit;
+	overflow: scroll;
 }
 div.recipe {
 	line-height: 1.2em;
@@ -324,10 +287,10 @@ div.recipe img:hover{
     cursor: pointer;
     border-radius: 15px;
     border: 2px solid #09203D;
-    padding: 3px; 
+    padding: 3px;
     width: 90px;
     height: 35px;
-}   
+}
 .btn1, .btn2 {
     background-color: #467DA2;
     color: white;
@@ -341,9 +304,34 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+}
 
+/* FORMS */
 
-/* LOGIN */
-
-
-
+div.center {
+    text-align: center;
+}
+textarea {
+	width: 400px;
+}
+div.login_page {
+    width: 300px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+}
+div.register{
+    width: 450px;
+    border: 15px solid #09203D;
+    padding: 25px;
+    margin: 0 auto;
+	overflow: scroll;
+}
+div.contact {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 25px;
+    margin: 0 auto;
+    text-align: center;
+}

@@ -10,20 +10,18 @@
 {% endblock %}
 
 {% block body_block %}
-<div class = "center2">
-    <div class="login_page"> 
-        <h2> Login </h2>
-        <form id="login_form" method="post" action={% url 'login' %}>
-            {% csrf_token %}
-            <h3> Username </h3>
-            <input type="text" placeholder="Username" value="" size="50" />
-            <br />
-            <h3> Password </h3>
-            <input type="password" placeholder="Password" value="" size="50" />
-            <br />
-            <br />
-            <input type="submit" value="Login" class="button" />
-        </form>
-    </div>
-</div>
+	<div class="login_page">
+		<h2> Login </h2>
+		<form id="login_form" method="post" action={% url 'login' %}>
+			{% csrf_token %}
+			<h3> Username </h3>
+			<input type="text" placeholder="Username" value="" size="50" />
+			<br />
+			<h3> Password </h3>
+			<input type="password" placeholder="Password" value="" size="50" />
+			<br />
+			<br />
+			<input type="submit" name="submit" value="submit" class="button" />
+		</form>
+	</div>
 {% endblock %}
