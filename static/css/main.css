@@ -322,6 +322,7 @@ div.register{
     padding: 25px;
     margin: 0 auto;
 	overflow: scroll;
+    text-align: center;
 }
 div.contact {
     width: 400px;
@@ -364,6 +365,7 @@ div.suggest{
     margin: 0 auto;
     text-align: center;
 }
+
 div.faq_class {
     width: 760px;
     border: 15px solid #09203D;
