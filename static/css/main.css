@@ -322,6 +322,7 @@ div.register{
     padding: 25px;
     margin: 0 auto;
 	overflow: scroll;
+    text-align: center;
 }
 div.contact {
     width: 400px;
