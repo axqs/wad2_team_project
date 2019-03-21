@@ -43,7 +43,7 @@ class ContactForm(forms.ModelForm):
 
 	class Meta:
 		model = Contact
-		fields = ('first_name','last_name','email','comment')
+		fields = ('first_name','last_name','email', 'comment')
 
 #asls for name of recipe, a photo, and cook time of recipe
 class AddRecipeForm(forms.ModelForm):

@@ -236,17 +236,27 @@ div.login_page {
     width: 300px;
     border: 15px solid #09203D;
     padding: 15px;
-    margin: 15px;
+    margin: 0 auto;
     text-align: center;
 
     
 }
 
-div.register_page{
-    width: 300px;
+div.register{
+    width: 400px;
     border: 15px solid #09203D;
     padding: 15px;
-    margin: 15px;
+    margin: 0 auto;
+    text-align: center;
+    
+
+}
+
+div.contact {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 0 auto;
     text-align: center;
 
 }
