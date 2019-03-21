@@ -255,6 +255,7 @@ div.account {
 	padding-left: 4em;
 	padding-right: 4em;
 }
+
 div.user_info img{
 	width: 100%;
 }
@@ -297,6 +298,11 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px;
+    width: 100px;
+    height: 45px;
 }
 .btn4, .btn3 {
     background-color: #467DA2;
@@ -304,6 +310,11 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px;
+    width: 100px;
+    height: 45px;
 }
 
 /* FORMS */
