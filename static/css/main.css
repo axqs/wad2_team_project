@@ -330,3 +330,11 @@ div.contact {
     margin: 0 auto;
     text-align: center;
 }
+
+div.add {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 25px;
+    margin: 0 auto;
+    text-align: center;
+}
