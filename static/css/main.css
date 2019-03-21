@@ -236,36 +236,6 @@ div.latest_posts {
 	text-align: center;
 }
 
-div.login_page {
-    width: 300px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-
-    
-}
-
-div.register{
-    width: 400px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-    
-
-}
-
-div.contact {
-    width: 400px;
-    border: 15px solid #09203D;
-    padding: 15px;
-    margin: 0 auto;
-    text-align: center;
-
-}
-    
-}
 div.latest_posts img.index-logo{
 	position: static;
 	text-align: center;
@@ -281,6 +251,41 @@ div.top_rated {
 	overflow: scroll;
 }
 
+/* LOGIN */
+
+div.login_page {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+
+/* REGISTER */
+
+div.register {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* CONTACT */
+
+div.contact {
+    width: 400px;
+    border: 15px solid #09203D;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+    
+
+
+
 /* PROFILE PAGE*/
 div.account {
 	position: fixed;
@@ -292,6 +297,7 @@ div.account {
 	padding-left: 4em;
 	padding-right: 4em;
 }
+
 div.user_info img{
 	width: 100%;
 }
@@ -334,6 +340,11 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px; 
+    width: 100px;
+    height: 45px;
 }
 .btn4, .btn3 {
     background-color: #467DA2;
@@ -341,9 +352,13 @@ div.recipe img:hover{
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #09203D;
+    padding: 3px; 
+    width: 100px;
+    height: 45px;
+}
 
-
-/* LOGIN */
 
 
 
