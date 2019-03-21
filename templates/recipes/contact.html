@@ -11,7 +11,7 @@
 
 {% block body_block %}
 <div class="contact"> 
-    <h2> Fill out below </h2>
+    <h2> Fill out the form below </h2>
     <form id="contactus_form" method="post" action={% url 'contact' %}>
 		{% csrf_token %}
 		{% for field in form.visible_fields %}
