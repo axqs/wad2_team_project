@@ -72,7 +72,7 @@ class AddRecipeForm(forms.ModelForm):
 	ingredients = forms.CharField(widget=forms.Textarea(), label=" Ingredients", required=True)
 	steps = forms.CharField(widget=forms.Textarea(), label="Steps", required=True)
 	#slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-	categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=CATEGORIES, required=True, help_text="Up to three")
+	categories = forms.MultipleChoiceField(widget=forms.SelectMultiple(),choices=CATEGORIES, required=True, help_text="Hold down Control (Command on Mac) to choose up to three!")
 
 	class Meta:
 		model = Recipe
