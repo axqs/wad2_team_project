@@ -5,7 +5,6 @@
 	<head lang="en">
 		<meta charset="utf-8" content="width=device-width, height=device-height" />
 		<link href="{% static 'css/main.css' %}" rel="stylesheet" />
-		<script src="{% static 'js/scripts.js' %}"></script>
 		<title>
 			Nbhd Cookbook -
 			{% block title_block %}
@@ -41,6 +40,8 @@
 				{% block body_block %}
 				{% endblock %}
 			</div>
+			<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		</div>
 		<footer>
 			<div class="urls">

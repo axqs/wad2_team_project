@@ -1,31 +1,6 @@
 {% extends 'recipes/base.html' %}
 {% load staticfiles %}
 
-{% block js %}
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="{% static 'js/scripts.js' %}"> </script>
-	<script>
-		$(document).ready(function(){
-			$(".btn1").click(function(){
-				$("p").hide();
-			});
-			$(".btn2").click(function(){
-				$("p").show();
-			});
-		});
-
-		$(document).ready(function(){
-			$(".btn3").click(function(){
-				$("p1").hide();
-			});
-			$(".btn4").click(function(){
-				$("p1").show();
-			});
-		});
-	</script>
-{% endblock %}
-
-
 {% block title_block %}
     FAQ
 {% endblock %}
